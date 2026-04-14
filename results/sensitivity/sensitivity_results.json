@@ -1,0 +1,79 @@
+{
+  "elh_thresholds": {
+    "map55_sbp180_dur180": {
+      "hypotension": 0.9242081835302176,
+      "hypertension": 0.9746357418971157,
+      "variability": 0.6065870891919063
+    },
+    "map60_sbp160_dur60": {
+      "hypotension": 0.8561608186273066,
+      "hypertension": 0.8844830829165033,
+      "variability": 0.6182359133486952
+    },
+    "map50_sbp200_dur300": {
+      "hypotension": 0.9824824824824825,
+      "hypertension": 1.0,
+      "variability": 0.6047635981846509
+    }
+  },
+  "prediction_windows": {
+    "15min": {},
+    "30min": {
+      "hypotension": 0.9242081835302176,
+      "hypertension": 0.9746357418971157,
+      "variability": 0.6065870891919063
+    },
+    "60min": {
+      "hypotension": 0.9242081835302176,
+      "hypertension": 0.9746357418971157,
+      "variability": 0.6065870891919063
+    }
+  },
+  "tree_depths": {
+    "depth_2": {
+      "hypotension": 0.653723677452491,
+      "hypertension": 0.7314451382694024,
+      "variability": 0.5
+    },
+    "depth_3": {
+      "hypotension": 0.653723677452491,
+      "hypertension": 0.7314451382694024,
+      "variability": 0.5
+    },
+    "depth_4": {
+      "hypotension": 0.653723677452491,
+      "hypertension": 0.7314451382694024,
+      "variability": 0.5
+    }
+  },
+  "hrv_windows": {
+    "hrv_30s": {
+      "hypotension": 0.9242081835302176,
+      "hypertension": 0.9746357418971157,
+      "variability": 0.6065870891919063
+    },
+    "hrv_60s": {
+      "hypotension": 0.9539849164288627,
+      "hypertension": 0.9802926599008732,
+      "variability": 0.6030926531575576
+    }
+  },
+  "first_event_only": {
+    "hypotension": 1.0,
+    "variability": 0.6579457117369695
+  },
+  "standard_lr": {
+    "hypotension": {
+      "standard_lr_auc": 0.9152199965759288,
+      "glmm_auc": 0.9242081835302176
+    },
+    "hypertension": {
+      "standard_lr_auc": 0.9750520368718405,
+      "glmm_auc": 0.9746357418971157
+    },
+    "variability": {
+      "standard_lr_auc": 0.6061849539101993,
+      "glmm_auc": 0.6065870891919063
+    }
+  }
+}

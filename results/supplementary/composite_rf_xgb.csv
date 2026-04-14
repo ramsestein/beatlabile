@@ -1,0 +1,8 @@
+model,outcome,n_features,auc,ci_lo,ci_hi,n_folds
+GLMM parsimonious (8 features),Composite (hypo OR hyper),8,0.5569,0.2014,0.9492,98
+Random Forest (40 features),Composite (hypo OR hyper),40,0.6371,0.4023,0.8977,98
+XGBoost (40 features),Composite (hypo OR hyper),40,0.5965,0.3064,0.8731,98
+Random Forest (40 features),Hypotension only,40,0.7543,0.4845,0.979,97
+XGBoost (40 features),Hypotension only,40,0.7396,0.4062,0.9669,97
+Random Forest (40 features),Hypertension only,40,0.8416,0.5431,1.0,81
+XGBoost (40 features),Hypertension only,40,0.8137,0.4231,1.0,81

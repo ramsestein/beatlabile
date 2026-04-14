@@ -1,0 +1,113 @@
+# config.yaml — BeatLabile configuration
+# Edita las rutas antes de ejecutar
+
+data:
+  clinic:  ../datasets/data/clinic
+  mimic:   ../datasets/data/mimic4wdb_full/waves
+  vitaldb: ../datasets/data/vitaldb/vital_full_cases
+
+results:
+  dir: results
+
+# --- Signal quality ---
+qc:
+  min_duration_seconds: 7200      # 2 h mínimo para fragmentos
+  complete_duration_seconds: 21600 # 6 h para subcohorte principal
+  max_artifact_fraction: 0.30
+  max_dampened_fraction: 0.20
+  max_af_fraction: 0.50
+  # ECG flatline: very small threshold (ECG in mV has QRS variance ~0.001—0.005)
+  # Use 1e-7 mV² — only true constant-value flatlines (disconnected lead) are flagged
+  ecg_flatline_variance_threshold: 1.0e-7
+  # ART flatline: use larger threshold (ART in mmHg, pulsatile variance >> 0.01)
+  # A truly flat ART (flush/disconnected) has variance ~0
+  flatline_variance_threshold: 1.0
+  flatline_duration_seconds: 2.0
+  art_sbp_max: 300
+  art_sbp_min: 40
+  art_dbp_max: 200
+  art_dbp_min: 20
+  art_pp_min: 10
+  noise_ratio_threshold: 0.5
+  noise_window_seconds: 5.0
+  dampened_pp_threshold: 15       # mmHg
+  disconnect_seconds: 1.0
+
+# --- Peak detection ---
+peaks:
+  r_peak:
+    rr_min_ms: 300
+    rr_max_ms: 2000
+    rr_diff_max_ms: 500
+  art:
+    min_height_mmhg: 40
+    min_distance_seconds: 0.25
+
+# --- Metric computation ---
+metrics:
+  window_seconds: 30              # 30 s deslizante
+  window_step: 1                  # paso = 1 latido
+  brs:
+    min_sequence_length: 3
+    min_correlation: 0.6
+    search_window_ms: [100, 400]  # R → pico sistólico
+    delay_change_threshold_ms: 50
+  rsa:
+    resp_freq_min: 0.12           # Hz
+    resp_freq_max: 0.40
+
+# --- ELH event detection ---
+events:
+  hypotension:
+    map_threshold: 55             # mmHg
+    min_duration_seconds: 180     # 3 min
+  hypertension:
+    sbp_threshold: 180            # mmHg
+    min_duration_seconds: 180
+  extreme_variability:
+    map_swing_threshold: 30       # mmHg pico-valle
+    swing_window_seconds: 600     # ≤10 min
+    min_episodes: 2
+    episode_window_seconds: 1800  # en 30 min
+
+# --- Window construction ---
+windows:
+  pre_event_minutes: 30
+  control_exclusion_minutes: 60   # ≥1 h de cualquier ELH
+  max_controls_per_patient: 3
+  event_buffer_minutes: 15        # distancia mínima entre ventanas pre-evento
+
+# --- Prediction horizons (sensitivity) ---
+prediction_horizons_minutes: [5, 10, 15, 30]
+
+# --- Modelling ---
+models:
+  cv_folds: 10
+  cv_repeats: 50
+  random_state: 42
+  milp:
+    max_depth: 3
+    milp_depth: 2
+    max_features: 3
+    max_milp_samples: 100
+    n_threshold_candidates: 3
+    solver_time_limit_s: 60
+    bootstrap_reps: 500
+    stability_freq_threshold: 0.80
+    threshold_variability_fraction: 0.15
+  rf:
+    n_estimators: 500
+    cv_folds: 5
+  xgboost:
+    early_stopping_rounds: 20
+    cv_folds: 5
+
+# --- Sensitivity analysis ---
+sensitivity:
+  map_thresholds: [55, 60, 50]
+  sbp_thresholds: [180, 160, 200]
+  event_durations_sec: [180, 60, 300]
+  prediction_windows_min: [15, 30, 60]
+  quality_thresholds: [0.70, 0.60, 0.80]
+  tree_depths: [2, 3, 4]
+  hrv_window_seconds: [30, 60]

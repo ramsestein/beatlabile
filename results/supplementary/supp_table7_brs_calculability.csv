@@ -1,0 +1,7 @@
+Cohort,Outcome,N windows (total),BRS calculable (%),BRS NaN (%)
+Clínic,Hypotension,951,96.64,3.36
+Clínic,Variability,2481,94.6,5.4
+Clínic,Hypertension,923,96.97,3.03
+VitalDB,Variability,2925,96.41,3.59
+VitalDB,Hypotension,988,95.85,4.15
+VitalDB,Hypertension,558,97.31,2.69

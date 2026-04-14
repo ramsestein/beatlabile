@@ -1,0 +1,53 @@
+{
+  "hypertension": {
+    "clinic vs mimic": {
+      "rho": 0.2803,
+      "p_value": 0.0798,
+      "n_features": 40
+    },
+    "clinic vs vitaldb": {
+      "rho": 0.6238,
+      "p_value": 1.702e-05,
+      "n_features": 40
+    },
+    "mimic vs vitaldb": {
+      "rho": 0.1174,
+      "p_value": 0.4704,
+      "n_features": 40
+    }
+  },
+  "hypotension": {
+    "clinic vs mimic": {
+      "rho": -0.2268,
+      "p_value": 0.1593,
+      "n_features": 40
+    },
+    "clinic vs vitaldb": {
+      "rho": 0.1918,
+      "p_value": 0.2359,
+      "n_features": 40
+    },
+    "mimic vs vitaldb": {
+      "rho": -0.3121,
+      "p_value": 0.04992,
+      "n_features": 40
+    }
+  },
+  "variability": {
+    "clinic vs mimic": {
+      "rho": 0.4347,
+      "p_value": 0.005062,
+      "n_features": 40
+    },
+    "clinic vs vitaldb": {
+      "rho": 0.6341,
+      "p_value": 1.115e-05,
+      "n_features": 40
+    },
+    "mimic vs vitaldb": {
+      "rho": 0.4839,
+      "p_value": 0.00156,
+      "n_features": 40
+    }
+  }
+}

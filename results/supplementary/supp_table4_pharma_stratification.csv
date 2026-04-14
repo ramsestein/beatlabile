@@ -1,0 +1,9 @@
+Outcome,Stratum,N events,N controls,AUC M1 (drug-naive signal),AUC M1 95% CI,AUC M2 (signal)
+Hypotension,All,505,483,0.58,[0.541–0.616],0.75
+Hypotension,Any Vaso,407,389,0.566,[0.524–0.607],0.688
+Hypotension,No Vaso,98,94,0.643,[0.556–0.726],0.874
+Hypotension,Stratum Eph Only,204,196,0.559,[0.503–0.622],0.854
+Hypotension,Stratum Phe Epi Bolus,123,124,0.588,[0.508–0.661],0.724
+Hypotension,Stratum No Vaso,98,94,0.643,[0.556–0.726],0.874
+Hypertension,All,75,483,0.56,[0.479–0.642],0.817
+Hypertension,Any Vaso,55,389,0.552,[0.469–0.647],0.821

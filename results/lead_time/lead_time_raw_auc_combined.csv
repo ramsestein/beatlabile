@@ -1,0 +1,17 @@
+ctrl_set,event_type,lead_min,n_events,n_controls,auc
+clinic_training,hypotension,0,88,148,0.6523341523341524
+clinic_training,hypotension,5,84,148,0.6361808236808236
+clinic_training,hypotension,15,81,148,0.6342175508842175
+clinic_training,hypotension,30,80,148,0.6173141891891892
+clinic_training,hypertension,0,64,148,0.7108319256756755
+clinic_training,hypertension,5,60,148,0.6981981981981983
+clinic_training,hypertension,15,56,148,0.6424951737451737
+clinic_training,hypertension,30,51,148,0.6789878113407525
+vitaldb_oos,hypotension,0,88,483,0.5313146997929606
+vitaldb_oos,hypotension,5,84,483,0.5127920733510796
+vitaldb_oos,hypotension,15,81,483,0.505814993737699
+vitaldb_oos,hypotension,30,80,483,0.49218426501035195
+vitaldb_oos,hypertension,0,64,483,0.7696363871635611
+vitaldb_oos,hypertension,5,60,483,0.7677018633540371
+vitaldb_oos,hypertension,15,56,483,0.7331410825199645
+vitaldb_oos,hypertension,30,51,483,0.7688466691024236

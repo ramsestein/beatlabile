@@ -1,0 +1,5 @@
+event_type,subset,n_patients,n_test_events,n_test_controls,auc,ci_lo,ci_hi
+hypotension,full,580,144,172,0.7502,0.692,0.8049
+hypotension,excl_gt50pct_NaN,550,154,124,0.7683,0.7121,0.8235
+hypertension,full,306,18,149,0.8166,0.6866,0.9067
+hypertension,excl_gt50pct_NaN,293,22,135,0.8387,0.7521,0.9189

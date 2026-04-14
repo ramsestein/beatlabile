@@ -1,0 +1,13 @@
+Outcome,Lead time (min),AUC,95% CI,N events
+Hypotension,0,0.7839,[0.678–0.855],66
+Hypotension,5,0.6685,[0.505–0.783],66
+Hypotension,10,0.6246,[0.462–0.758],66
+Hypotension,15,0.605,[0.436–0.746],66
+Hypotension,20,0.5927,[0.420–0.737],66
+Hypotension,30,0.5677,[0.384–0.721],66
+Hypertension,0,0.8989,[0.791–0.966],38
+Hypertension,5,0.8527,[0.704–0.941],38
+Hypertension,10,0.8045,[0.623–0.915],38
+Hypertension,15,0.7794,[0.570–0.902],38
+Hypertension,20,0.7657,[0.555–0.894],38
+Hypertension,30,0.7491,[0.535–0.885],38

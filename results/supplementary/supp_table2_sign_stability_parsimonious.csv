@@ -1,0 +1,17 @@
+Feature,Domain,Outcome,Point estimate,Dominant sign,Sign stability (%),Interpretation
+BRS minimum,BRS,Hypertension,-1.5242,−,100.0,directionally robust
+CV(PA) std,BPV,Hypertension,-2.5405,−,99.9,directionally robust
+ARV std,BPV,Hypertension,0.9729,+,99.9,directionally robust
+CV(PA) mean,BPV,Hypertension,-1.3342,−,99.7,directionally robust
+SD(PA) std,BPV,Hypertension,3.3961,+,99.1,directionally robust
+SD(PA) slope,BPV,Hypertension,0.5759,+,93.3,directionally robust
+SD(PA) max,BPV,Hypertension,-1.1254,−,90.1,directionally robust
+SDNN mean,HRV,Hypertension,-0.1124,−,64.3,do not interpret physiologically
+BRS minimum,BRS,Hypotension,-1.7004,−,100.0,directionally robust
+CV(PA) std,BPV,Hypotension,1.3287,+,99.2,directionally robust
+SD(PA) max,BPV,Hypotension,-0.7667,−,99.2,directionally robust
+SD(PA) mean,BPV,Hypotension,0.9001,+,96.5,directionally robust
+RSA max,RSA,Hypotension,-0.5653,−,89.2,directionally moderate
+RSA mean,RSA,Hypotension,0.0524,+,59.2,do not interpret physiologically
+ARV std,BPV,Hypotension,-0.0238,−,58.3,do not interpret physiologically
+ARV mean,BPV,Hypotension,0.0025,+,52.7,do not interpret physiologically

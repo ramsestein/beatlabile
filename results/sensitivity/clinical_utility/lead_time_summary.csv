@@ -1,0 +1,25 @@
+model,subset,n_windows,metric,mean_min,median_min,q25_min,q75_min,event_type
+GLMM-hypotension,All event windows,144,Lead time from window start (min),30.0,30.0,30.0,30.0,hypotension
+GLMM-hypotension,All event windows,144,Lead time from window centre (min),15.0,15.0,15.0,15.0,hypotension
+GLMM-hypotension,All event windows,144,Lead time from window end (min),0.0,0.0,0.0,0.0,hypotension
+GLMM-hypotension,True positives only,13,Lead time from window start (min),30.0,30.0,30.0,30.0,hypotension
+GLMM-hypotension,True positives only,13,Lead time from window centre (min),15.0,15.0,15.0,15.0,hypotension
+GLMM-hypotension,True positives only,13,Lead time from window end (min),0.0,0.0,0.0,0.0,hypotension
+MILP-hypotension,All event windows,144,Lead time from window start (min),30.0,30.0,30.0,30.0,hypotension
+MILP-hypotension,All event windows,144,Lead time from window centre (min),15.0,15.0,15.0,15.0,hypotension
+MILP-hypotension,All event windows,144,Lead time from window end (min),0.0,0.0,0.0,0.0,hypotension
+MILP-hypotension,True positives only,78,Lead time from window start (min),30.0,30.0,30.0,30.0,hypotension
+MILP-hypotension,True positives only,78,Lead time from window centre (min),15.0,15.0,15.0,15.0,hypotension
+MILP-hypotension,True positives only,78,Lead time from window end (min),0.0,0.0,0.0,0.0,hypotension
+GLMM-hypertension,All event windows,18,Lead time from window start (min),30.0,30.0,30.0,30.0,hypertension
+GLMM-hypertension,All event windows,18,Lead time from window centre (min),15.0,15.0,15.0,15.0,hypertension
+GLMM-hypertension,All event windows,18,Lead time from window end (min),0.0,0.0,0.0,0.0,hypertension
+GLMM-hypertension,True positives only,1,Lead time from window start (min),30.0,30.0,30.0,30.0,hypertension
+GLMM-hypertension,True positives only,1,Lead time from window centre (min),15.0,15.0,15.0,15.0,hypertension
+GLMM-hypertension,True positives only,1,Lead time from window end (min),0.0,0.0,0.0,0.0,hypertension
+MILP-hypertension,All event windows,18,Lead time from window start (min),30.0,30.0,30.0,30.0,hypertension
+MILP-hypertension,All event windows,18,Lead time from window centre (min),15.0,15.0,15.0,15.0,hypertension
+MILP-hypertension,All event windows,18,Lead time from window end (min),0.0,0.0,0.0,0.0,hypertension
+MILP-hypertension,True positives only,1,Lead time from window start (min),30.0,30.0,30.0,30.0,hypertension
+MILP-hypertension,True positives only,1,Lead time from window centre (min),15.0,15.0,15.0,15.0,hypertension
+MILP-hypertension,True positives only,1,Lead time from window end (min),0.0,0.0,0.0,0.0,hypertension

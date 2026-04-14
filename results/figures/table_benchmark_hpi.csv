@@ -1,0 +1,11 @@
+system,cohort,n_patients,auc_hypotension,auc_hypertension,features_n,feature_type,interpretable,reference
+HPI (Hatib 2018),derivación (retrospectiva),1334,0.883,,13,morfología onda arterial,No,"Hatib et al. Anesthesiology 2018"
+HPI (Schneck 2020),validación prospectiva,204,0.820,,13,morfología onda arterial,No,"Schneck et al. Br J Anaesth 2020"
+ANSWer / AHI-PI (Michard 2020),derivación multicéntrica,2083,0.818,,variableHRV+PA,No,"Michard et al. J Clin Monit 2020"
+PARPM (Hatib 2017),derivación,371,0.776,,6,tendencias PAM,Parcial,"Hatib et al. Crit Care Med 2017"
+BeatLabile GLMM completo — Clínic (CV),prospectiva piloto,204,0.750 [0.568–0.932],,40,métricas autonómicas PA beat-by-beat,Sí (GLMM coeficientes),este trabajo
+BeatLabile GLMM parsimonioso — Clínic (CV),prospectiva piloto,204,0.656 [0.474–0.838],,8,métricas autonómicas PA beat-by-beat,Sí (GLMM coeficientes),este trabajo
+BeatLabile GLMM parsimonioso — VitalDB (refit M2),validación externa,~900,0.844 [0.806–0.879],,8,métricas autonómicas PA beat-by-beat,Sí (GLMM coeficientes),este trabajo
+BeatLabile GLMM completo — VitalDB (refit M2),validación externa,~900,,0.875 [0.831–0.912],40,métricas autonómicas PA beat-by-beat,Sí (GLMM coeficientes),este trabajo
+BeatLabile MILP — Clínic (bootstrap),prospectiva piloto,204,0.730 (B=50),,2,métricas autonómicas PA (reglas explícitas),Sí (árbol profundidad 2),este trabajo
+BeatLabile MILP — Clínic (bootstrap),prospectiva piloto,204,,0.763 (B=50),2,métricas autonómicas PA (reglas explícitas),Sí (árbol profundidad 2),este trabajo

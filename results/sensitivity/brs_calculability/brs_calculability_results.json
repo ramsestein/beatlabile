@@ -1,0 +1,226 @@
+{
+  "nan_rates": [
+    {
+      "cohort": "Cl\u00ednic",
+      "event_type": "hypotension",
+      "label": "event",
+      "n_windows": 66,
+      "brs_mean_nan_pct": 7.58,
+      "brs_only1_pct": 0.0,
+      "brs_min_nan_pct": 7.58,
+      "brs_calculable_pct": 92.42
+    },
+    {
+      "cohort": "Cl\u00ednic",
+      "event_type": "hypotension",
+      "label": "control",
+      "n_windows": 885,
+      "brs_mean_nan_pct": 3.05,
+      "brs_only1_pct": 0.68,
+      "brs_min_nan_pct": 3.05,
+      "brs_calculable_pct": 96.95
+    },
+    {
+      "cohort": "Cl\u00ednic",
+      "event_type": "hypotension",
+      "label": "all",
+      "n_windows": 951,
+      "brs_mean_nan_pct": 3.36,
+      "brs_only1_pct": 0.63,
+      "brs_min_nan_pct": 3.36,
+      "brs_calculable_pct": 96.64
+    },
+    {
+      "cohort": "Cl\u00ednic",
+      "event_type": "variability",
+      "label": "event",
+      "n_windows": 1596,
+      "brs_mean_nan_pct": 6.7,
+      "brs_only1_pct": 1.63,
+      "brs_min_nan_pct": 6.7,
+      "brs_calculable_pct": 93.3
+    },
+    {
+      "cohort": "Cl\u00ednic",
+      "event_type": "variability",
+      "label": "control",
+      "n_windows": 885,
+      "brs_mean_nan_pct": 3.05,
+      "brs_only1_pct": 0.68,
+      "brs_min_nan_pct": 3.05,
+      "brs_calculable_pct": 96.95
+    },
+    {
+      "cohort": "Cl\u00ednic",
+      "event_type": "variability",
+      "label": "all",
+      "n_windows": 2481,
+      "brs_mean_nan_pct": 5.4,
+      "brs_only1_pct": 1.29,
+      "brs_min_nan_pct": 5.4,
+      "brs_calculable_pct": 94.6
+    },
+    {
+      "cohort": "Cl\u00ednic",
+      "event_type": "hypertension",
+      "label": "event",
+      "n_windows": 38,
+      "brs_mean_nan_pct": 2.63,
+      "brs_only1_pct": 0.0,
+      "brs_min_nan_pct": 2.63,
+      "brs_calculable_pct": 97.37
+    },
+    {
+      "cohort": "Cl\u00ednic",
+      "event_type": "hypertension",
+      "label": "control",
+      "n_windows": 885,
+      "brs_mean_nan_pct": 3.05,
+      "brs_only1_pct": 0.68,
+      "brs_min_nan_pct": 3.05,
+      "brs_calculable_pct": 96.95
+    },
+    {
+      "cohort": "Cl\u00ednic",
+      "event_type": "hypertension",
+      "label": "all",
+      "n_windows": 923,
+      "brs_mean_nan_pct": 3.03,
+      "brs_only1_pct": 0.65,
+      "brs_min_nan_pct": 3.03,
+      "brs_calculable_pct": 96.97
+    },
+    {
+      "cohort": "VitalDB",
+      "event_type": "variability",
+      "label": "event",
+      "n_windows": 2442,
+      "brs_mean_nan_pct": 3.85,
+      "brs_only1_pct": 0.66,
+      "brs_min_nan_pct": 3.85,
+      "brs_calculable_pct": 96.15
+    },
+    {
+      "cohort": "VitalDB",
+      "event_type": "variability",
+      "label": "control",
+      "n_windows": 483,
+      "brs_mean_nan_pct": 2.28,
+      "brs_only1_pct": 0.0,
+      "brs_min_nan_pct": 2.28,
+      "brs_calculable_pct": 97.72
+    },
+    {
+      "cohort": "VitalDB",
+      "event_type": "variability",
+      "label": "all",
+      "n_windows": 2925,
+      "brs_mean_nan_pct": 3.59,
+      "brs_only1_pct": 0.55,
+      "brs_min_nan_pct": 3.59,
+      "brs_calculable_pct": 96.41
+    },
+    {
+      "cohort": "VitalDB",
+      "event_type": "hypotension",
+      "label": "event",
+      "n_windows": 505,
+      "brs_mean_nan_pct": 5.94,
+      "brs_only1_pct": 0.59,
+      "brs_min_nan_pct": 5.94,
+      "brs_calculable_pct": 94.06
+    },
+    {
+      "cohort": "VitalDB",
+      "event_type": "hypotension",
+      "label": "control",
+      "n_windows": 483,
+      "brs_mean_nan_pct": 2.28,
+      "brs_only1_pct": 0.0,
+      "brs_min_nan_pct": 2.28,
+      "brs_calculable_pct": 97.72
+    },
+    {
+      "cohort": "VitalDB",
+      "event_type": "hypotension",
+      "label": "all",
+      "n_windows": 988,
+      "brs_mean_nan_pct": 4.15,
+      "brs_only1_pct": 0.3,
+      "brs_min_nan_pct": 4.15,
+      "brs_calculable_pct": 95.85
+    },
+    {
+      "cohort": "VitalDB",
+      "event_type": "hypertension",
+      "label": "event",
+      "n_windows": 75,
+      "brs_mean_nan_pct": 5.33,
+      "brs_only1_pct": 0.0,
+      "brs_min_nan_pct": 5.33,
+      "brs_calculable_pct": 94.67
+    },
+    {
+      "cohort": "VitalDB",
+      "event_type": "hypertension",
+      "label": "control",
+      "n_windows": 483,
+      "brs_mean_nan_pct": 2.28,
+      "brs_only1_pct": 0.0,
+      "brs_min_nan_pct": 2.28,
+      "brs_calculable_pct": 97.72
+    },
+    {
+      "cohort": "VitalDB",
+      "event_type": "hypertension",
+      "label": "all",
+      "n_windows": 558,
+      "brs_mean_nan_pct": 2.69,
+      "brs_only1_pct": 0.0,
+      "brs_min_nan_pct": 2.69,
+      "brs_calculable_pct": 97.31
+    }
+  ],
+  "sensitivity_auc": [
+    {
+      "event_type": "hypotension",
+      "subset": "full",
+      "n_patients": 580,
+      "n_test_events": 144,
+      "n_test_controls": 172,
+      "auc": 0.7502,
+      "ci_lo": 0.692,
+      "ci_hi": 0.8049
+    },
+    {
+      "event_type": "hypotension",
+      "subset": "excl_gt50pct_NaN",
+      "n_patients": 550,
+      "n_test_events": 154,
+      "n_test_controls": 124,
+      "auc": 0.7683,
+      "ci_lo": 0.7121,
+      "ci_hi": 0.8235
+    },
+    {
+      "event_type": "hypertension",
+      "subset": "full",
+      "n_patients": 306,
+      "n_test_events": 18,
+      "n_test_controls": 149,
+      "auc": 0.8166,
+      "ci_lo": 0.6866,
+      "ci_hi": 0.9067
+    },
+    {
+      "event_type": "hypertension",
+      "subset": "excl_gt50pct_NaN",
+      "n_patients": 293,
+      "n_test_events": 22,
+      "n_test_controls": 135,
+      "auc": 0.8387,
+      "ci_lo": 0.7521,
+      "ci_hi": 0.9189
+    }
+  ]
+}

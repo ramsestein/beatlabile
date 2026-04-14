@@ -1,0 +1,41 @@
+{
+  "hypotension": {
+    "glmm_auc": 0.6381142098273573,
+    "glmm_auc_ci95": [
+      0.5391699383921907,
+      0.7425631040155496
+    ],
+    "glmm_citl": -0.08183303525347381,
+    "glmm_cal_slope": 0.16195891004009746,
+    "glmm_auc_recalibrated": 0.6381142098273573,
+    "milp_auc": 0.4339309428950863,
+    "n_events": 48,
+    "n_controls": 251
+  },
+  "hypertension": {
+    "glmm_auc": 0.5577689243027888,
+    "glmm_auc_ci95": [
+      0.3916079775386642,
+      0.808531746031746
+    ],
+    "glmm_citl": -0.011319924708912845,
+    "glmm_cal_slope": 0.048103363561317725,
+    "glmm_auc_recalibrated": 0.5577689243027888,
+    "milp_auc": 0.42828685258964144,
+    "n_events": 5,
+    "n_controls": 251
+  },
+  "variability": {
+    "glmm_auc": 0.5072374860419913,
+    "glmm_auc_ci95": [
+      0.4657813535352758,
+      0.550982321870647
+    ],
+    "glmm_citl": -0.03298062239001476,
+    "glmm_cal_slope": -0.09334275680511017,
+    "glmm_auc_recalibrated": 0.5072374860419913,
+    "milp_auc": 0.5,
+    "n_events": 578,
+    "n_controls": 251
+  }
+}

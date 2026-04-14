@@ -1,0 +1,9 @@
+Outcome,Duration threshold,N events,Prevalence,GLMM AUC
+Hypotension,1min,66,0.0694,
+Hypotension,3min,66,0.0694,
+Hypotension,5min,28,0.0294,
+Hypotension,10min,8,0.0084,
+Hypertension,1min,38,0.0412,
+Hypertension,3min,38,0.0412,
+Hypertension,5min,14,0.0152,
+Hypertension,10min,4,,

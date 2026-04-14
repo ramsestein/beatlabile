@@ -1,0 +1,14 @@
+{
+  "n_cohorts": 3,
+  "cohorts": [
+    "clinic",
+    "mimic",
+    "vitaldb"
+  ],
+  "n_features": 40,
+  "event_types": [
+    "hypotension",
+    "hypertension",
+    "variability"
+  ]
+}

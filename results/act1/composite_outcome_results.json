@@ -1,0 +1,21 @@
+{
+  "composite_definition": "hypotension OR hypertension event in 30-min horizon",
+  "n_patients_total": 270,
+  "n_patients_any_event": 42,
+  "n_patients_hypo_only": 25,
+  "n_patients_hyper_only": 15,
+  "n_patients_both": 2,
+  "n_events": 110,
+  "n_controls": 841,
+  "epv_8features": 13.8,
+  "auc_training_apparent": 0.6198,
+  "auc_cv_5fold": {
+    "cv_auc": 0.565,
+    "ci_lo": 0.4457,
+    "ci_hi": 0.6849,
+    "n_oof": 951,
+    "n_oof_events": 110
+  },
+  "model": "GLMM parsimonious hypotension features (8 features)",
+  "note": "Composite uses hypotension feature set as proxy; a dedicated joint model would be needed for a proper composite predictor. Results reported here are exploratory."
+}
