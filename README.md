@@ -221,10 +221,18 @@ M1 = Act 1 GLMM applied as-is. M2–M6 = GLMM refitted on VitalDB (70/30 patient
 
 ## Lead Time Analysis
 
-M1 GLMM evaluated at multiple prediction horizons using **10-fold patient-level OOS CV**
-(no data leakage) followed by linear feature back-extrapolation for lead > 0.
+Two complementary analyses on the **Clínic** cohort (exploratory) and the **VitalDB** external
+cohort (confirmatory). Both share the same M1 GLMM (signal-only, parsimonious) but use
+different feature pipelines and different control sets — they are **not** replicates of each
+other and the AUCs are not directly comparable.
 
-### Exploratory (linear extrapolation, Clínic OOS)
+### Exploratory — Clínic intra-cohort, 10-fold patient-level OOS CV
+
+M1 GLMM with **linear feature back-extrapolation** for lead > 0 (level features only;
+std/slope held constant). 95 % CI via **cluster-bootstrap on patients**, B = 500.
+This is **not** LOPO-CV and **not** VitalDB — it is Clínic-only OOS CV.
+Source: [results/lead_time/lead_time_auc.csv](results/lead_time/lead_time_auc.csv)
+(n_events = 66 hypotension / 38 hypertension / 1 596 variability; n_windows = 951 / 923 / 2 481).
 
 | Lead (min) | Hypotension [95 % CI] | Hypertension [95 % CI] | Variability [95 % CI] |
 |:----------:|:---------------------:|:----------------------:|:----------------------:|
@@ -235,22 +243,33 @@ M1 GLMM evaluated at multiple prediction horizons using **10-fold patient-level 
 | 20 | 0.593 [0.420–0.737] | 0.766 [0.555–0.894] | 0.498 [0.470–0.526] |
 | 30 | 0.568 [0.384–0.721] | 0.749 [0.536–0.885] | 0.492 [0.464–0.520] |
 
-### Confirmatory (raw signal re-extraction)
+### Confirmatory — raw signal re-extraction at t − lead
 
-VitalDB OOS controls (n=483, never seen in training):
+Windows are re-extracted from raw `.vital` files (no extrapolation) and scored with the
+**same** trained M1. Two control regimes are reported side by side. Point AUCs only; CIs
+have not been computed for this block.
+Source: [results/lead_time/lead_time_raw_auc_combined.csv](results/lead_time/lead_time_raw_auc_combined.csv).
 
-| Lead (min) | Hypotension AUC (VitalDB OOS) | Hypertension AUC (VitalDB OOS) |
-|:----------:|:-----:|:-----:|
-| 0 | 0.531 | **0.770** |
-| 5 | 0.513 | 0.768 |
-| 15 | 0.506 | 0.733 |
-| 30 | 0.492 | **0.769** |
+| Lead (min) | Hypotension — Clínic train ctrl (n = 148) | Hypotension — **VitalDB OOS ctrl (n = 483)** | Hypertension — Clínic train ctrl | Hypertension — **VitalDB OOS ctrl** |
+|:----------:|:---:|:---:|:---:|:---:|
+| 0  | 0.652 | **0.531** | 0.711 | **0.770** |
+| 5  | 0.636 | 0.513 | 0.698 | 0.768 |
+| 15 | 0.634 | 0.506 | 0.642 | 0.733 |
+| 30 | 0.617 | 0.492 | 0.679 | **0.769** |
 
-> **Hypertension**: robust signal stable to 30 min in OOS controls (AUC 0.769).  
-> **Hypotension**: AUC ≈ 0.50 OOS — does not generalise to VitalDB (surgical vs ICU population).
+> **Hypertension**: robust signal, stable to 30 min in VitalDB OOS (AUC ≈ 0.77).
+> **Hypotension**: AUC ≈ 0.50 in VitalDB OOS — does not generalise to the ICU population
+> (surgical → ICU domain shift).
 
-Data → `results/lead_time/lead_time_auc.csv` · `results/lead_time/lead_time_raw_auc_combined.csv`  
-Figures → `results/lead_time/fig_lead_time.pdf` · `results/figures/lead_time_raw_curves.pdf`
+> **Note on cross-block comparison.** The exploratory 0.784 / 0.899 (Clínic OOS-CV, with
+> extrapolation) and the confirmatory VitalDB-OOS 0.531 / 0.770 (raw, no extrapolation) are
+> **not the same number measured twice**. They differ in cohort (Clínic vs VitalDB), control
+> set, extrapolation, and CI procedure. Likewise, the hypertension 0.899 here is **not**
+> comparable to the Act 3 VitalDB 70/30 split AUC — the latter is an independent
+> train/test on VitalDB (see [results/act3/act3_results.json](results/act3/act3_results.json)).
+
+Data → [results/lead_time/lead_time_auc.csv](results/lead_time/lead_time_auc.csv) · [results/lead_time/lead_time_raw_auc_combined.csv](results/lead_time/lead_time_raw_auc_combined.csv)
+Figures → [results/lead_time/fig_lead_time.pdf](results/lead_time/fig_lead_time.pdf) · [results/figures/lead_time_raw_curves.pdf](results/figures/lead_time_raw_curves.pdf)
 
 ---
 
