@@ -1,0 +1,10 @@
+Variable,"All included (n=1,080)",Source
+"Age, years [median (IQR)]",61 (51–69),VitalDB cases.csv
+Female sex (%),41.7%,VitalDB cases.csv
+"BMI, kg/m² [median (IQR)]",22.6 (20.4–25.0),VitalDB cases.csv
+ASA class III–IV (%),18.9%,VitalDB cases.csv
+Emergency surgery (%),13.7%,VitalDB cases.csv
+"Recording duration, h [median]",3.08,Derived
+Hypotension events (n patients),505 (580),BeatLabile pipeline
+Hypertension events (n patients),75 (306),BeatLabile pipeline
+Total windows,"4,471",BeatLabile pipeline

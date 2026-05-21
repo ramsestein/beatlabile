@@ -1,0 +1,36 @@
+{
+  "prevalence": {
+    "clinic": {
+      "pct": 34.1,
+      "n_events": 441,
+      "n_windows": 1293
+    },
+    "vitaldb": {
+      "pct": 76.5,
+      "n_events": 1132,
+      "n_windows": 1479
+    }
+  },
+  "spearman_rho": {
+    "rho": 0.202,
+    "p": 0.212
+  },
+  "glmm_validation_map65": {
+    "auc": 0.7153,
+    "ci_lo": 0.6623,
+    "ci_hi": 0.7668,
+    "n_train_events": 788,
+    "n_test_events": 344,
+    "n_test_controls": 104
+  },
+  "milp_map55_rule_on_map65": {
+    "sensitivity": 0.375,
+    "specificity": 0.817,
+    "ppv": 0.872,
+    "npv": 0.283,
+    "tp": 129,
+    "fp": 19,
+    "tn": 85,
+    "fn": 215
+  }
+}

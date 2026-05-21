@@ -1,0 +1,282 @@
+patient_id,t_seconds,raw_text,category,subcategory,seq_num,dose,dose_unit,propo_target,remi_target
+230393,59.82714009284973,AG,fase,AG,0,,,,
+230393,945.8271400928497,silla playa,fase,silla_playa,0,,,,
+230393,1513.8271400928497,piel,estimulo,piel,1,,,,
+230393,1657.8271400928497,"propo 2.5, remi 2",infusion_change,propofol_remi,0,,,2.5,2.0
+230393,1789.8271400928497,"propo 2.5, remi 2.5",infusion_change,propofol_remi,0,,,2.5,2.5
+230393,1897.8271400928497,"propo 2.5, remi 3",infusion_change,propofol_remi,0,,,2.5,3.0
+230393,2013.8271400928497,limpian,fase,limpian,0,,,,
+230393,2476.8271400928497,anclaje,estimulo,anclaje,1,,,,
+230393,2808.8271400928497,"propo 2.3, remi 3",infusion_change,propofol_remi,0,,,2.3,3.0
+230393,2984.8271400928497,fenta,medicacion_bolus,fentanilo,0,,,,
+230393,3088.8271400928497,"propo 2, remi 2.8",infusion_change,propofol_remi,0,,,2.0,2.8
+230393,3223.8271400928497,"propo 2, remi 2.5",infusion_change,propofol_remi,0,,,2.0,2.5
+230393,3424.8271400928497,"propo 2, remi 2.3",infusion_change,propofol_remi,0,,,2.0,2.3
+230393,3527.8271400928497,limpian,fase,limpian,0,,,,
+230393,3755.8271400928497,"propo 2, remi 2",infusion_change,propofol_remi,0,,,2.0,2.0
+230393,3826.8271400928497,anclaje 2,estimulo,anclaje,2,,,,
+230393,4223.82714009285,piel,estimulo,piel,2,,,,
+230393,5055.82714009285,fin AG,fase,fin_AG,0,,,,
+397651,212.37984657287598,AG,fase,AG,0,,,,
+397651,632.379846572876,DLI,fase,DLI,0,,,,
+397651,1196.379846572876,piel,estimulo,piel,1,,,,
+397651,1207.379846572876,trocar,estimulo,trocar,1,,,,
+397651,1254.379846572876,"propo 3.5, remi 3",infusion_change,propofol_remi,0,,,3.5,3.0
+397651,1358.379846572876,trocar 2,estimulo,trocar,2,,,,
+397651,1421.379846572876,trocar 3,estimulo,trocar,3,,,,
+397651,1640.379846572876,"propo 3, remi 3",infusion_change,propofol_remi,0,,,3.0,3.0
+397651,1825.379846572876,fentanilo 100 mcg,medicacion_bolus,fentanilo,0,100.0,mcg,,
+397651,2000.379846572876,anclaje,estimulo,anclaje,1,,,,
+397651,2284.379846572876,limpian,fase,limpian,0,,,,
+397651,2382.379846572876,fentanilo 50 mcg,medicacion_bolus,fentanilo,0,50.0,mcg,,
+397651,2451.379846572876,"propo 3, remi 3.5",infusion_change,propofol_remi,0,,,3.0,3.5
+397651,2509.379846572876,"propo 3, remi 4",infusion_change,propofol_remi,0,,,3.0,4.0
+397651,2587.379846572876,metadona 2mg,medicacion_bolus,metadona,0,2.0,mg,,
+397651,2764.379846572876,metadona 2mg,medicacion_bolus,metadona,0,2.0,mg,,
+397651,2805.379846572876,anclaje,estimulo,anclaje,2,,,,
+397651,2896.379846572876,"propo 3, remi 5",infusion_change,propofol_remi,0,,,3.0,5.0
+397651,3140.379846572876,anclaje,estimulo,anclaje,3,,,,
+397651,3537.379846572876,anclaje,estimulo,anclaje,4,,,,
+397651,3736.379846572876,anclaje,estimulo,anclaje,5,,,,
+397651,4101.379846572876,sutura,estimulo,sutura,1,,,,
+397651,4153.379846572876,"propo 3, remi 3",infusion_change,propofol_remi,0,,,3.0,3.0
+397651,5299.379846572876,fin AG,fase,fin_AG,0,,,,
+4214722,263.5526912212372,AG,fase,AG,0,,,,
+4214722,1161.5526912212372,SP,otro,otro,0,,,,
+4214722,1193.5526912212372,"propo 2, remi 1",infusion_change,propofol_remi,0,,,2.0,1.0
+4214722,1760.5526912212372,"propo 2, remi 1.5",infusion_change,propofol_remi,0,,,2.0,1.5
+4214722,1931.5526912212372,piel,estimulo,piel,1,,,,
+4214722,2165.552691221237,limpian,fase,limpian,0,,,,
+4214722,2764.552691221237,efedrina,medicacion_bolus,efedrina,0,,,,
+4214722,2864.552691221237,"propo 1.6, remi 1.5",infusion_change,propofol_remi,0,,,1.6,1.5
+4214722,3220.552691221237,trocar,estimulo,trocar,1,,,,
+4214722,3333.552691221237,anclaje,estimulo,anclaje,1,,,,
+4214722,3643.552691221237,sutura,estimulo,sutura,1,,,,
+4214722,3650.552691221237,"propo 1.8, remi 1.5",infusion_change,propofol_remi,0,,,1.8,1.5
+4214722,3746.552691221237,sutura,estimulo,sutura,2,,,,
+4214722,4052.552691221237,piel,estimulo,piel,2,,,,
+4214722,4665.552691221237,fin AG,fase,fin_AG,0,,,,
+4247699,57.88510179519653,AG,fase,AG,0,,,,
+4247699,191.88510179519653,ML,fase,ML,0,,,,
+4247699,313.88510179519653,DL,fase,DL,0,,,,
+4247699,713.8851017951965,efedrina,medicacion_bolus,efedrina,0,,,,
+4247699,892.8851017951965,piel,estimulo,piel,1,,,,
+4247699,918.8851017951965,trocar,estimulo,trocar,1,,,,
+4247699,967.8851017951965,remi 1.5,infusion_change,remi_only,0,,,,1.5
+4247699,1103.8851017951965,trocar 2,estimulo,trocar,2,,,,
+4247699,1153.8851017951965,efedrina,medicacion_bolus,efedrina,0,,,,
+4247699,1417.8851017951965,trocar 3,estimulo,trocar,3,,,,
+4247699,1446.8851017951965,remi 2,infusion_change,remi_only,0,,,,2.0
+4247699,1516.8851017951965,"propo 3, remi 2.5",infusion_change,propofol_remi,0,,,3.0,2.5
+4247699,1633.8851017951965,propo 2.5,infusion_change,propo_only,0,,,2.5,
+4247699,1916.8851017951965,remi 2,infusion_change,remi_only,0,,,,2.0
+4247699,2129.8851017951965,efedrina,medicacion_bolus,efedrina,0,,,,
+4247699,2191.8851017951965,anclaje,estimulo,anclaje,1,,,,
+4247699,2385.8851017951965,anclaje 2,estimulo,anclaje,2,,,,
+4247699,2857.8851017951965,anclaje 3,estimulo,anclaje,3,,,,
+4247699,3163.8851017951965,anclaje 4,estimulo,anclaje,4,,,,
+4247699,3336.8851017951965,"propo 3.5, remi 3",infusion_change,propofol_remi,0,,,3.5,3.0
+4247699,3740.8851017951965,"propo 3.2, remi 2.8",infusion_change,propofol_remi,0,,,3.2,2.8
+4247699,4183.8851017951965,sutura,estimulo,sutura,1,,,,
+4247699,4204.8851017951965,"propo 2.5, remi 2",infusion_change,propofol_remi,0,,,2.5,2.0
+4247699,4651.8851017951965,fin AG,fase,fin_AG,0,,,,
+4912692,561.726494550705,AG,fase,AG,0,,,,
+4912692,746.726494550705,efedrina,medicacion_bolus,efedrina,0,,,,
+4912692,1034.726494550705,silla playa,fase,silla_playa,0,,,,
+4912692,1176.726494550705,efedrina,medicacion_bolus,efedrina,0,,,,
+4912692,1863.726494550705,piel,estimulo,piel,1,,,,
+4912692,1990.726494550705,limpian,fase,limpian,0,,,,
+4912692,2025.726494550705,"propo 1.8, remi 1",infusion_change,propofol_remi,0,,,1.8,1.0
+4912692,2054.726494550705,limpian,fase,limpian,0,,,,
+4912692,2263.726494550705,"propo 1.8, remi 1.5",infusion_change,propofol_remi,0,,,1.8,1.5
+4912692,2454.726494550705,"propo 2, remi 1.5",infusion_change,propofol_remi,0,,,2.0,1.5
+4912692,2754.726494550705,"propo 1.8, remi 1.5",infusion_change,propofol_remi,0,,,1.8,1.5
+4912692,2783.726494550705,trocar,estimulo,trocar,1,,,,
+4912692,3010.726494550705,anclaje,estimulo,anclaje,1,,,,
+4912692,3497.726494550705,"propo 1.6, remi 1.5",infusion_change,propofol_remi,0,,,1.6,1.5
+4912692,4137.726494550705,anclaje 2,estimulo,anclaje,2,,,,
+4912692,4693.726494550705,piel,estimulo,piel,2,,,,
+5020549,596.954261302948,AG,fase,AG,0,,,,
+5020549,1072.954261302948,DLD,fase,DLD,0,,,,
+5020549,1183.954261302948,"propo 3, remi 2.5",infusion_change,propofol_remi,0,,,3.0,2.5
+5020549,1734.954261302948,"propo 2.3, remi 2",infusion_change,propofol_remi,0,,,2.3,2.0
+5020549,1870.954261302948,piel,estimulo,piel,1,,,,
+5020549,2156.954261302948,trocar,estimulo,trocar,1,,,,
+5020549,2313.954261302948,trocar 2,estimulo,trocar,2,,,,
+5020549,2340.954261302948,"propo 2, remi 2",infusion_change,propofol_remi,0,,,2.0,2.0
+5020549,2490.954261302948,trocar 3,estimulo,trocar,3,,,,
+5020549,2651.954261302948,limpian,fase,limpian,0,,,,
+5020549,2850.954261302948,anclaje,estimulo,anclaje,1,,,,
+5020549,3466.954261302948,ancle 2,estimulo,anclaje,2,,,,
+5020549,3577.954261302948,"propo 2, remi 1.8",infusion_change,propofol_remi,0,,,2.0,1.8
+5020549,3745.954261302948,efedrina,medicacion_bolus,efedrina,0,,,,
+5020549,3946.954261302948,tiran la sutura,estimulo,sutura,1,,,,
+5020549,4050.954261302948,piel,estimulo,piel,2,,,,
+5020549,4885.954261302948,fin AG,fase,fin_AG,0,,,,
+5362391,346.2123465538025,AG,fase,AG,0,,,,
+5362391,1032.2123465538025,piel,estimulo,piel,1,,,,
+5362391,1070.2123465538025,trocar,estimulo,trocar,1,,,,
+5362391,1309.2123465538025,trocar 2,estimulo,trocar,2,,,,
+5362391,1729.2123465538025,efedrina,medicacion_bolus,efedrina,0,,,,
+5362391,2589.2123465538025,sutura,estimulo,sutura,1,,,,
+5362391,2843.2123465538025,Fin AG,fase,fin_AG,0,,,,
+5431482,474.26187562942505,AG,fase,AG,0,,,,
+5431482,850.261875629425,"propo 2.5, remi 1.3",infusion_change,propofol_remi,0,,,2.5,1.3
+5431482,1312.261875629425,piel,estimulo,piel,1,,,,
+5431482,1519.261875629425,trocar,estimulo,trocar,1,,,,
+5431482,1605.261875629425,trocar 2,estimulo,trocar,2,,,,
+5431482,1624.261875629425,"propo 2.3, remi 1.5",infusion_change,propofol_remi,0,,,2.3,1.5
+5431482,1755.261875629425,trocar 3,estimulo,trocar,3,,,,
+5431482,1850.261875629425,limpian,fase,limpian,0,,,,
+5431482,2132.261875629425,anclaje,estimulo,anclaje,1,,,,
+5431482,2850.261875629425,anclaje 2,estimulo,anclaje,2,,,,
+5431482,3003.261875629425,anclaje 3,estimulo,anclaje,3,,,,
+5431482,3167.261875629425,anclaje 4,estimulo,anclaje,4,,,,
+5431482,3433.261875629425,efedrina,medicacion_bolus,efedrina,0,,,,
+5431482,3597.261875629425,anclaje 5,estimulo,anclaje,5,,,,
+5431482,3786.261875629425,anclaje 6,estimulo,anclaje,6,,,,
+5431482,4290.261875629425,efedrina,medicacion_bolus,efedrina,0,,,,
+5431482,4601.261875629425,piel,estimulo,piel,2,,,,
+5582912,309.0667185783386,AG,fase,AG,0,,,,
+5582912,541.0667185783386,DLD,fase,DLD,0,,,,
+5582912,714.0667185783386,efedrina,medicacion_bolus,efedrina,0,,,,
+5582912,1046.0667185783386,"propo 2.8, remi 2.5",infusion_change,propofol_remi,0,,,2.8,2.5
+5582912,1062.0667185783386,.,otro,otro,0,,,,
+5582912,1121.0667185783386,piel,estimulo,piel,1,,,,
+5582912,1481.0667185783386,trocar,estimulo,trocar,1,,,,
+5582912,1582.0667185783386,"propo 3.5, remi 3",infusion_change,propofol_remi,0,,,3.5,3.0
+5582912,1747.0667185783386,trocar 2,estimulo,trocar,2,,,,
+5582912,1987.0667185783386,trocar 3,estimulo,trocar,3,,,,
+5582912,2203.0667185783386,limpian,fase,limpian,0,,,,
+5582912,2291.0667185783386,anclaje,estimulo,anclaje,1,,,,
+5582912,2864.0667185783386,"propo 2.8, remi 2.3",infusion_change,propofol_remi,0,,,2.8,2.3
+5582912,2951.0667185783386,anclaje 2,estimulo,anclaje,2,,,,
+5582912,3181.0667185783386,anclaje 3,estimulo,anclaje,3,,,,
+5582912,3233.0667185783386,efedrina,medicacion_bolus,efedrina,0,,,,
+5582912,3372.0667185783386,anclaje 4,estimulo,anclaje,4,,,,
+5582912,3933.0667185783386,piel,estimulo,piel,2,,,,
+5582912,5109.066718578339,fin AG,fase,fin_AG,0,,,,
+5589679,676.4450874328613,AG,fase,AG,0,,,,
+5589679,1562.4450874328613,piel,estimulo,piel,1,,,,
+5589679,1689.4450874328613,"propo 3, remi 2",infusion_change,propofol_remi,0,,,3.0,2.0
+5589679,1721.4450874328613,trocar,estimulo,trocar,1,,,,
+5589679,1767.4450874328613,efedrina,medicacion_bolus,efedrina,0,,,,
+5589679,1920.4450874328613,trocar 2,estimulo,trocar,2,,,,
+5589679,2305.4450874328613,"propo 3, remi 1.8",infusion_change,propofol_remi,0,,,3.0,1.8
+5589679,2385.4450874328613,efedrina,medicacion_bolus,efedrina,0,,,,
+5589679,2550.4450874328613,anclaje,estimulo,anclaje,1,,,,
+5589679,2811.4450874328613,efedrina,medicacion_bolus,efedrina,0,,,,
+5589679,3054.4450874328613,anclaje,estimulo,anclaje,2,,,,
+5589679,3285.4450874328613,anclaje 3,estimulo,anclaje,3,,,,
+5589679,3571.4450874328613,"propo 3.5, remi 2",infusion_change,propofol_remi,0,,,3.5,2.0
+5589679,3645.4450874328613,piel,estimulo,piel,2,,,,
+5589679,3904.4450874328613,fin IQ,fase,fin_IQ,0,,,,
+70288016,620.8097159862518,AG,fase,AG,0,,,,
+70288016,1190.8097159862518,silla playa,fase,silla_playa,0,,,,
+70288016,1605.8097159862518,piel,estimulo,piel,1,,,,
+70288016,1649.8097159862518,"propo 2, remi 1,5",infusion_change,propofol_remi,0,,,2.0,1.0
+70288016,1728.8097159862518,"propo 2, remi 1,8",infusion_change,propofol_remi,0,,,2.0,1.0
+70288016,1967.8097159862518,limpian,fase,limpian,0,,,,
+70288016,2044.8097159862518,"propo 2,5, remi 2,5",infusion_change,propofol_remi,0,,,2.0,2.0
+70288016,2182.809715986252,"propo 2.3, remi 2,5",infusion_change,propofol_remi,0,,,2.3,2.0
+70288016,2548.809715986252,fresan,estimulo,fresa,1,,,,
+70288016,2840.809715986252,trocar,estimulo,trocar,1,,,,
+70288016,2947.809715986252,anclaje,estimulo,anclaje,1,,,,
+70288016,3158.809715986252,"propo 2,3, remi 2,3",infusion_change,propofol_remi,0,,,2.0,2.0
+70288016,3273.809715986252,"propo 2.2, remi 2,3",infusion_change,propofol_remi,0,,,2.2,2.0
+70288016,3349.809715986252,"propo 2.2, remi 2",infusion_change,propofol_remi,0,,,2.2,2.0
+70288016,3488.809715986252,"propo 2, remi 2",infusion_change,propofol_remi,0,,,2.0,2.0
+70288016,3782.809715986252,"propo 2, remi 1.8",infusion_change,propofol_remi,0,,,2.0,1.8
+70288016,4095.809715986252,fresan,estimulo,fresa,2,,,,
+70288016,4349.809715986252,"propo 2, remi 1.6",infusion_change,propofol_remi,0,,,2.0,1.6
+70288016,4664.809715986252,piel,estimulo,piel,2,,,,
+70288016,5107.809715986252,fin AG,fase,fin_AG,0,,,,
+70297385,343.09728741645813,AG,fase,AG,0,,,,
+70297385,832.0972874164581,DLI,fase,DLI,0,,,,
+70297385,1070.0972874164581,"propo 3, remi 2",infusion_change,propofol_remi,0,,,3.0,2.0
+70297385,1534.0972874164581,piel,estimulo,piel,1,,,,
+70297385,1549.0972874164581,"trocar
+
+propo 2.8, remi 2
+
+propo 2.5, remi 2",estimulo,trocar,2,,,,
+70297385,1549.0972874164581,"trocar
+
+propo 2.8, remi 2
+
+propo 2.5, remi 2",infusion_change,propofol_remi,0,,,2.8,2.0
+70297385,1549.0972874164581,"trocar
+
+propo 2.8, remi 2
+
+propo 2.5, remi 2",infusion_change,propofol_remi,0,,,2.5,2.0
+70297385,2413.097287416458,sutura,estimulo,sutura,1,,,,
+70297385,2967.097287416458,fin AG,fase,fin_AG,0,,,,
+70297385,3290.097287416458,fenilefrina,medicacion_bolus,fenilefrina,0,,,,
+70431992,1053.0097784996033,AG,fase,AG,0,,,,
+70431992,1370.0097784996033,silla playa,fase,silla_playa,0,,,,
+70431992,1417.0097784996033,"propo 3, remi 2,3",infusion_change,propofol_remi,0,,,3.0,2.0
+70431992,1435.0097784996033,piel,estimulo,piel,1,,,,
+70431992,1501.0097784996033,"propo 2.8, remi 2.2",infusion_change,propofol_remi,0,,,2.8,2.2
+70431992,1804.0097784996033,sutura,estimulo,sutura,1,,,,
+70431992,1977.0097784996033,limpian,fase,limpian,0,,,,
+70431992,2333.0097784996033,trocar,estimulo,trocar,1,,,,
+70431992,2381.0097784996033,anclaje,estimulo,anclaje,1,,,,
+70431992,2515.0097784996033,anclaje 2,estimulo,anclaje,2,,,,
+70431992,2792.0097784996033,limpian,fase,limpian,0,,,,
+70431992,4090.0097784996033,piel,estimulo,piel,2,,,,
+70431992,4117.009778499603,"propo 2.6, remi 2",infusion_change,propofol_remi,0,,,2.6,2.0
+70431992,4785.009778499603,fin AG,fase,fin_AG,0,,,,
+70436283,467.8039553165436,AG,fase,AG,0,,,,
+70436283,862.8039553165436,piel,estimulo,piel,1,,,,
+70436283,975.8039553165436,"propo 3.3, remi 2",infusion_change,propofol_remi,0,,,3.3,2.0
+70436283,1166.8039553165436,trocar,estimulo,trocar,1,,,,
+70436283,1608.8039553165436,anclaje,estimulo,anclaje,1,,,,
+70436283,1953.8039553165436,trocar,estimulo,trocar,2,,,,
+70436283,2099.8039553165436,"propo 2.6, remi 2",infusion_change,propofol_remi,0,,,2.6,2.0
+70436283,2355.8039553165436,anclaje 2,estimulo,anclaje,2,,,,
+70436283,2675.8039553165436,anclaje 3,estimulo,anclaje,3,,,,
+70436283,2914.8039553165436,anclaje 4,estimulo,anclaje,4,,,,
+70436283,3272.8039553165436,sutura piel,estimulo,sutura,1,,,,
+70551555,553.5440151691437,AG,fase,AG,0,,,,
+70551555,1256.5440151691437,fenilefrina,medicacion_bolus,fenilefrina,0,,,,
+70551555,1508.5440151691437,playa,otro,otro,0,,,,
+70551555,1729.5440151691437,fenilefrina,medicacion_bolus,fenilefrina,0,,,,
+70551555,2098.5440151691437,"propo 2, remi 1.3",infusion_change,propofol_remi,0,,,2.0,1.3
+70551555,2130.5440151691437,piel,estimulo,piel,1,,,,
+70551555,2196.5440151691437,trocar,estimulo,trocar,1,,,,
+70551555,2364.5440151691437,limpian,fase,limpian,0,,,,
+70551555,2843.5440151691437,"propo 2, remi 1.8",infusion_change,propofol_remi,0,,,2.0,1.8
+70551555,2987.5440151691437,propo 2.2. remi 2,infusion_change,propofol_remi,0,,,2.2,2.0
+70551555,3533.5440151691437,anclaje,estimulo,anclaje,1,,,,
+70551555,3670.5440151691437,trocar,estimulo,trocar,2,,,,
+70551555,4727.544015169144,"propo 2, remi 2",infusion_change,propofol_remi,0,,,2.0,2.0
+70551555,4857.544015169144,trocar,estimulo,trocar,3,,,,
+70551555,5208.544015169144,piel,estimulo,piel,2,,,,
+70551555,5499.544015169144,stop AG,fase,AG,0,,,,
+70628874,241.10535717010498,AG,fase,AG,0,,,,
+70628874,648.105357170105,"propo 2.5, remi 1.5",infusion_change,propofol_remi,0,,,2.5,1.5
+70628874,1142.105357170105,Silla,otro,otro,0,,,,
+70628874,1723.105357170105,piel,estimulo,piel,1,,,,
+70628874,1816.105357170105,"propo 2, remi 2.5",infusion_change,propofol_remi,0,,,2.0,2.5
+70628874,1946.105357170105,limpian,fase,limpian,0,,,,
+70628874,1990.105357170105,"propo 2, remi 3",infusion_change,propofol_remi,0,,,2.0,3.0
+70628874,2149.105357170105,"propo 1.8, remi 3",infusion_change,propofol_remi,0,,,1.8,3.0
+70628874,2283.105357170105,limpian,fase,limpian,0,,,,
+70628874,2805.105357170105,fentanilo,medicacion_bolus,fentanilo,0,,,,
+70628874,3260.105357170105,sutura,estimulo,sutura,1,,,,
+70628874,3348.105357170105,"propo 1.8, remi 2",infusion_change,propofol_remi,0,,,1.8,2.0
+70628874,3745.105357170105,fin AG,fase,fin_AG,0,,,,
+70767707,351.97109603881836,sutura,estimulo,sutura,1,,,,
+70767707,1113.9710960388184,fin AG,fase,fin_AG,0,,,,
+720142,784.8205237388611,AG,fase,AG,0,,,,
+720142,1078.820523738861,propo 2.5. remi 1.8,infusion_change,propofol_remi,0,,,2.5,1.8
+720142,1833.820523738861,piel,estimulo,piel,1,,,,
+720142,2051.820523738861,efedrina,medicacion_bolus,efedrina,0,,,,
+720142,2177.820523738861,propo 2.8. remi 2.3,infusion_change,propofol_remi,0,,,2.8,2.3
+720142,2817.820523738861,trocar,estimulo,trocar,1,,,,
+720142,2969.820523738861,anclaje,estimulo,anclaje,1,,,,
+720142,3643.820523738861,anclaje 2,estimulo,anclaje,2,,,,
+720142,3949.820523738861,piel,estimulo,piel,2,,,,
+720142,4087.820523738861,fin IQ,fase,fin_IQ,0,,,,
+720142,4209.820523738861,fin AG,fase,fin_AG,0,,,,

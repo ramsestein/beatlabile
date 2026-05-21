@@ -1,0 +1,20 @@
+patient_id,drug,t_bolus_s,passes_no_other_vasopressor_pm5min,passes_no_pain_stim_pre2min,passes_within_AG_window,passes_valid_pre_features,passes_ppg_valid_70pct_pre,brs_seq_valid_pct_pre,has_valid_control_window,final_status
+4214722,efedrina,2764.552691221237,True,True,True,True,True,0.7111111111111111,,clean
+4247699,efedrina,713.8851017951965,True,True,True,True,True,0.7814814814814814,,clean
+4247699,efedrina,1153.8851017951963,True,False,True,True,True,,,excluded_pain_stimulus_in_pre2min
+4247699,efedrina,2129.8851017951965,True,True,True,True,True,0.6074074074074074,,clean
+4912692,efedrina,746.726494550705,True,True,True,True,True,0.6851851851851852,,clean
+4912692,efedrina,1176.726494550705,True,True,True,True,True,0.7444444444444445,,clean
+5020549,efedrina,3745.954261302948,True,True,True,False,False,0.0,,excluded_invalid_pre_features (ptt_cv_valid_pre=0
+5362391,efedrina,1729.2123465538025,True,True,True,True,True,0.36666666666666664,,clean
+5431482,efedrina,3433.261875629425,True,True,True,False,False,0.05185185185185185,,excluded_invalid_pre_features (ptt_cv_valid_pre=0
+5431482,efedrina,4290.261875629425,True,True,True,False,False,0.06296296296296296,,excluded_invalid_pre_features (ptt_cv_valid_pre=0
+5582912,efedrina,714.0667185783386,True,True,True,True,True,0.8,,clean
+5582912,efedrina,3233.0667185783386,True,False,True,True,True,,,excluded_pain_stimulus_in_pre2min
+5589679,efedrina,1767.445087432861,True,False,True,True,True,,,excluded_pain_stimulus_in_pre2min
+5589679,efedrina,2385.4450874328613,True,True,True,True,True,0.14444444444444443,,clean
+5589679,efedrina,2811.4450874328613,True,True,True,True,True,0.43703703703703706,,clean
+70297385,fenilefrina,3290.097287416458,True,True,False,True,True,,,"excluded_outside_AG_window (t=3290, AG=[343,2967]"
+70551555,fenilefrina,1256.5440151691437,True,True,True,False,False,0.0,,excluded_invalid_pre_features (ppg_valid_pre=0.00
+70551555,fenilefrina,1729.5440151691437,True,True,True,True,True,0.37777777777777777,,clean
+720142,efedrina,2051.820523738861,True,True,True,True,True,0.21851851851851853,,clean

@@ -1,0 +1,32 @@
+{
+  "prevalence_pct": 76.5,
+  "n_events": 1132,
+  "n_windows": 1479,
+  "glmm_applied_map65": {
+    "auc": 0.6291,
+    "ci_lo": 0.5674,
+    "ci_hi": 0.6906,
+    "n_test_events": 344,
+    "n_test_controls": 104
+  },
+  "milp_map55_on_map65": {
+    "sensitivity": 0.375,
+    "specificity": 0.817,
+    "ppv": 0.872,
+    "npv": 0.283,
+    "tp": 129,
+    "fp": 19,
+    "tn": 85,
+    "fn": 215
+  },
+  "baseline_map55": {
+    "glmm_auc": 0.844,
+    "glmm_ci_lo": 0.806,
+    "glmm_ci_hi": 0.883,
+    "milp_sens": 0.513,
+    "milp_spec": 0.77,
+    "milp_ppv": 0.716,
+    "milp_npv": 0.584,
+    "prevalence_pct": 51.1
+  }
+}

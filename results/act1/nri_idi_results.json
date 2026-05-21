@@ -1,0 +1,42 @@
+{
+  "hypotension": {
+    "n_events": 66,
+    "n_controls": 885,
+    "conventional_cols": [
+      "std_pa_mean",
+      "cv_pa_mean"
+    ],
+    "glmm_full_vs_conventional": {
+      "nri_continuous": 0.7897277863379557,
+      "idi": 0.07215392024335729,
+      "idi_new": 0.22782488330537723,
+      "idi_old": 0.15567096306201994
+    },
+    "glmm_pars_vs_conventional": {
+      "nri_continuous": 0.11309707241910649,
+      "idi": -0.06981830885215395,
+      "idi_new": 0.08585265420986599,
+      "idi_old": 0.15567096306201994
+    }
+  },
+  "hypertension": {
+    "n_events": 38,
+    "n_controls": 885,
+    "conventional_cols": [
+      "std_pa_mean",
+      "cv_pa_mean"
+    ],
+    "glmm_full_vs_conventional": {
+      "nri_continuous": 1.0277728218852216,
+      "idi": 0.0997442464035555,
+      "idi_new": 0.33921755401607495,
+      "idi_old": 0.23947330761251945
+    },
+    "glmm_pars_vs_conventional": {
+      "nri_continuous": 0.1998810585786499,
+      "idi": -0.12987957583009435,
+      "idi_new": 0.10959373178242511,
+      "idi_old": 0.23947330761251945
+    }
+  }
+}

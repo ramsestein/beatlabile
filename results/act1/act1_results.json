@@ -1,0 +1,158 @@
+{
+  "hypotension": {
+    "glmm_cv_auc_mean": 0.75,
+    "glmm_cv_auc_std": 0.182,
+    "glmm_cv_auc_ci95": [
+      0.258,
+      0.988
+    ],
+    "rf_cv_auc_ci95": [
+      0.5452407573047108,
+      0.9848958333333334
+    ],
+    "xgb_cv_auc_ci95": [
+      0.5534253741527544,
+      0.9789062500000001
+    ],
+    "milp_train_auc": 0.653723677452491,
+    "milp_bootstrap_auc_mean": 0.7345512583461735,
+    "rf_cv_auc": 0.7918553589735318,
+    "xgb_cv_auc": 0.7932352961899907,
+    "nri_idi": {},
+    "benchmark": {
+      "best_interpretable_auc": 0.75,
+      "rf_auc": 0.7918553589735318,
+      "xgb_auc": 0.7932352961899907,
+      "delta_auc_vs_rf": 0.041855358973531764,
+      "delta_auc_vs_xgb": 0.04323529618999067,
+      "interpretability_cost_acceptable": true
+    },
+    "n_events": 66,
+    "n_controls": 885,
+    "glmm_pars_cv_auc_mean": 0.656,
+    "glmm_pars_cv_auc_std": 0.192,
+    "glmm_pars_cv_auc_ci95": [
+      0.238,
+      1.0
+    ],
+    "glmm_pars_n_features": 8,
+    "glmm_pars_epv": 8.25,
+    "glmm_pars_features": [
+      "std_pa_mean",
+      "cv_pa_std",
+      "rsa_max",
+      "arv_std",
+      "brs_min",
+      "arv_mean",
+      "std_pa_max",
+      "rsa_mean"
+    ],
+    "milp_bootstrap_auc_std": 0.05482956014912557,
+    "milp_bootstrap_n_boot": 500,
+    "milp_bootstrap_n_valid": 500
+  },
+  "hypertension": {
+    "glmm_cv_auc_mean": 0.882,
+    "glmm_cv_auc_std": 0.162,
+    "glmm_cv_auc_ci95": [
+      0.391,
+      1.0
+    ],
+    "rf_cv_auc_ci95": [
+      0.5851918954782076,
+      0.9991745283018868
+    ],
+    "xgb_cv_auc_ci95": [
+      0.7482607260726073,
+      0.9925707547169811
+    ],
+    "milp_train_auc": 0.7314451382694024,
+    "milp_bootstrap_auc_mean": 0.7626082069580732,
+    "rf_cv_auc": 0.8061976855557806,
+    "xgb_cv_auc": 0.8640048557636646,
+    "nri_idi": {},
+    "benchmark": {
+      "best_interpretable_auc": 0.882,
+      "rf_auc": 0.8061976855557806,
+      "xgb_auc": 0.8640048557636646,
+      "delta_auc_vs_rf": -0.07580231444421937,
+      "delta_auc_vs_xgb": -0.017995144236335414,
+      "interpretability_cost_acceptable": false
+    },
+    "n_events": 38,
+    "n_controls": 885,
+    "glmm_pars_cv_auc_mean": 0.834,
+    "glmm_pars_cv_auc_std": 0.167,
+    "glmm_pars_cv_auc_ci95": [
+      0.412,
+      1.0
+    ],
+    "glmm_pars_n_features": 8,
+    "glmm_pars_epv": 4.75,
+    "glmm_pars_features": [
+      "std_pa_std",
+      "std_pa_max",
+      "cv_pa_std",
+      "std_pa_slope",
+      "arv_std",
+      "cv_pa_mean",
+      "brs_min",
+      "sdnn_mean"
+    ],
+    "milp_bootstrap_auc_std": 0.057887274068315196,
+    "milp_bootstrap_n_boot": 500,
+    "milp_bootstrap_n_valid": 500
+  },
+  "variability": {
+    "glmm_cv_auc_mean": 0.546647709407862,
+    "glmm_cv_auc_std": 0.046633645555612745,
+    "glmm_cv_auc_ci95": [
+      0.4542118626040843,
+      0.6226293406984685
+    ],
+    "rf_cv_auc_ci95": [
+      0.5056639267347746,
+      0.6114888306216665
+    ],
+    "xgb_cv_auc_ci95": [
+      0.5074661596216665,
+      0.6022765908959938
+    ],
+    "milp_train_auc": 0.5,
+    "milp_bootstrap_auc_mean": 0.5744838239666965,
+    "rf_cv_auc": 0.5582596615629986,
+    "xgb_cv_auc": 0.5472481430227076,
+    "nri_idi": {},
+    "benchmark": {
+      "best_interpretable_auc": 0.546647709407862,
+      "rf_auc": 0.5582596615629986,
+      "xgb_auc": 0.5472481430227076,
+      "delta_auc_vs_rf": 0.011611952155136551,
+      "delta_auc_vs_xgb": 0.0006004336148456302,
+      "interpretability_cost_acceptable": true
+    },
+    "n_events": 1596,
+    "n_controls": 885,
+    "glmm_pars_cv_auc_mean": 0.5514159374199259,
+    "glmm_pars_cv_auc_std": 0.05031749644373732,
+    "glmm_pars_cv_auc_ci95": [
+      0.45762101958299956,
+      0.661073014826795
+    ],
+    "glmm_pars_n_features": 8,
+    "glmm_pars_epv": 199.5,
+    "glmm_pars_features": [
+      "sdnn_std",
+      "cv_pa_mean",
+      "rmssd_std",
+      "rmssd_mean",
+      "std_pa_std",
+      "std_pa_max",
+      "pnn50_mean",
+      "sdnn_mean"
+    ],
+    "milp_bootstrap_auc_std": 0.013924939054015439,
+    "milp_bootstrap_n_boot": 500,
+    "milp_bootstrap_n_valid": 500
+  }
+}

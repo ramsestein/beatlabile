@@ -1,0 +1,4 @@
+cohort,event_type,n_events,n_features,epv,flag
+clinic,hypotension,66,40,1.65,LOW EPV (<10)
+clinic,hypertension,38,40,0.95,LOW EPV (<10)
+clinic,variability,1596,40,39.9,OK

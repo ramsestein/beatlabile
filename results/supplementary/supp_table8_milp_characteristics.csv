@@ -1,0 +1,7 @@
+Outcome,Dataset,N windows,Sensitivity,Specificity,PPV,NPV,F1,LR+,LR−
+Hypotension,Clinic Development,951,0.485,0.823,0.169,0.955,0.251,2.73,0.63
+Hypotension,Vitaldb Test,287,0.513,0.77,0.716,0.584,0.598,2.23,0.63
+Hypotension,Vitaldb Full,988,0.511,0.783,0.711,0.605,0.595,2.35,0.62
+Hypertension,Clinic Development,923,0.605,0.858,0.154,0.981,0.246,4.25,0.46
+Hypertension,Vitaldb Test,167,0.087,0.965,0.286,0.869,0.133,2.5,0.95
+Hypertension,Vitaldb Full,558,0.12,0.932,0.214,0.872,0.154,1.76,0.94

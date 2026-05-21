@@ -1,0 +1,10 @@
+event_type,cohort_1,cohort_2,pair,n_features,spearman_rho,p_value
+hypertension,clinic,mimic,clinic vs mimic,40,0.2803,0.0798
+hypertension,clinic,vitaldb,clinic vs vitaldb,40,0.6238,1.702e-05
+hypertension,mimic,vitaldb,mimic vs vitaldb,40,0.1174,0.4704
+hypotension,clinic,mimic,clinic vs mimic,40,-0.2268,0.1593
+hypotension,clinic,vitaldb,clinic vs vitaldb,40,0.1918,0.2359
+hypotension,mimic,vitaldb,mimic vs vitaldb,40,-0.3121,0.04992
+variability,clinic,mimic,clinic vs mimic,40,0.4347,0.005062
+variability,clinic,vitaldb,clinic vs vitaldb,40,0.6341,1.115e-05
+variability,mimic,vitaldb,mimic vs vitaldb,40,0.4839,0.00156

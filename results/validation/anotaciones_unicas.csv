@@ -1,0 +1,96 @@
+texto,tipo,frecuencia
+piel,estimulo,29
+anclaje,estimulo,19
+AG,otro,18
+trocar,estimulo,18
+efedrina,medicacion,17
+limpian,otro,15
+fin AG,otro,12
+sutura,estimulo,10
+trocar 2,estimulo,8
+anclaje 2,estimulo,8
+anclaje 3,estimulo,5
+trocar 3,estimulo,5
+anclaje 4,estimulo,4
+"propo 2, remi 2",otro,4
+silla playa,otro,4
+"propo 2, remi 1.8",otro,3
+fenilefrina,medicacion,3
+"propo 1.8, remi 1.5",otro,3
+"propo 3.5, remi 3",otro,3
+fin IQ,otro,2
+fresan,estimulo,2
+"propo 2, remi 1.5",otro,2
+"propo 1.6, remi 1.5",otro,2
+"propo 2.5, remi 2",otro,2
+"propo 2.6, remi 2",otro,2
+DLD,otro,2
+DLI,otro,2
+"propo 3, remi 2",otro,2
+"propo 3, remi 2.5",otro,2
+remi 2,otro,2
+"propo 3, remi 3",otro,2
+metadona 2mg,otro,2
+"propo 2, remi 2.5",otro,2
+anclaje 6,estimulo,1
+anclaje 5,estimulo,1
+ML,otro,1
+Fin AG,otro,1
+DL,otro,1
+.,otro,1
+Silla,otro,1
+SP,otro,1
+despertar,otro,1
+ancle 2,estimulo,1
+fenta,otro,1
+fentanilo,medicacion,1
+fentanilo 100 mcg,medicacion,1
+fentanilo 50 mcg,medicacion,1
+"propo 2, remi 1.6",otro,1
+"propo 2, remi 2.3",otro,1
+"propo 2, remi 2.8",otro,1
+"propo 2, remi 3",otro,1
+"propo 1.8, remi 3",otro,1
+"propo 1.8, remi 2",otro,1
+"propo 1.8, remi 1",otro,1
+"propo 2, remi 1",otro,1
+"propo 2, remi 1.3",otro,1
+"propo 2, remi 1,8",otro,1
+"propo 2, remi 1,5",otro,1
+playa,otro,1
+"propo 2.5, remi 1.5",otro,1
+"propo 2.5, remi 1.3",otro,1
+propo 2.5,otro,1
+"propo 2.3, remi 3",otro,1
+"propo 2.3, remi 2,5",otro,1
+"propo 2.3, remi 2",otro,1
+"propo 2.3, remi 1.5",otro,1
+propo 2.2. remi 2,otro,1
+"propo 2.2, remi 2,3",otro,1
+"propo 2.2, remi 2",otro,1
+"propo 2,5, remi 2,5",otro,1
+"propo 2,3, remi 2,3",otro,1
+"propo 2.8, remi 2.5",otro,1
+propo 2.5. remi 1.8,otro,1
+"propo 2.5, remi 3",otro,1
+"propo 2.5, remi 2.5",otro,1
+"propo 3, remi 4",otro,1
+"propo 3, remi 3.5",otro,1
+"propo 3, remi 1.8",otro,1
+"propo 3, remi 2,3",otro,1
+propo 2.8. remi 2.3,otro,1
+"propo 2.8, remi 2.2",otro,1
+"propo 2.8, remi 2.3",otro,1
+"propo 3, remi 5",otro,1
+remi 1.5,otro,1
+"propo 3.2, remi 2.8",otro,1
+"propo 3.3, remi 2",otro,1
+"propo 3.5, remi 2",otro,1
+tiran la sutura,estimulo,1
+sutura piel,estimulo,1
+stop AG,otro,1
+"trocar
+
+propo 2.8, remi 2
+
+propo 2.5, remi 2",estimulo,1

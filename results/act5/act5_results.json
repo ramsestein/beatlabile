@@ -1,0 +1,16 @@
+{
+  "tripod_items_total": 22,
+  "tripod_fully_addressed": 17,
+  "tripod_partial": 5,
+  "acts_available": [
+    "act1",
+    "act2",
+    "act3",
+    "act4"
+  ],
+  "cohorts_in_table1": [
+    "clinic",
+    "mimic",
+    "vitaldb"
+  ]
+}

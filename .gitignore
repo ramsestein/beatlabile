@@ -1,0 +1,59 @@
+# ── Datasets (never commit raw data) ──────────────────────────────────────────
+datasets/data/
+pacientes vital recorder/
+database general pacientes estudio hombro.xlsx
+results/validation/inventario_pacientes.csv
+datasets/**/*.vital
+datasets/**/*.dat
+datasets/**/*.hea
+datasets/**/*.csv
+datasets/**/*.parquet
+datasets/**/*.h5
+datasets/**/*.hdf5
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.whl
+
+# ── Virtual environments ───────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── Jupyter ───────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── Results cache & large binaries ────────────────────────────────────────────
+results/cache/
+*.pkl
+*.joblib
+
+# ── OS & editor ───────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ── Pytest / coverage ─────────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# ── Logs and temp files ────────────────────────────────────────────────────────
+*.log
+*.tmp
+*.bak

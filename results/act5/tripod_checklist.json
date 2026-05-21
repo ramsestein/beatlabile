@@ -1,0 +1,156 @@
+[
+  {
+    "item": "1",
+    "section": "Title & Abstract",
+    "requirement": "Identify the study as developing and/or validating a multivariable prediction model, type of prediction (diagnosis/prognosis) and population.",
+    "addressed": "Yes",
+    "evidence": "Title and abstract identify prognosis prediction of haemodynamic instability (hypotension/hypertension/variability) in ICU patients."
+  },
+  {
+    "item": "2",
+    "section": "Introduction",
+    "requirement": "Explain the medical context (including whether diagnostic or prognostic) and rationale for developing/validating the model.",
+    "addressed": "Yes",
+    "evidence": "Section 1 describes clinical motivation: real-time prediction of vasopressor-induced haemodynamic events using arterial waveform beat-by-beat features."
+  },
+  {
+    "item": "3",
+    "section": "Introduction",
+    "requirement": "Specify the objectives, including whether the study describes the development or validation of the model, or both.",
+    "addressed": "Yes",
+    "evidence": "Section 1 specifies: Act 1 development (Clínic), Acts 2–3 external validation (MIMIC-IV, VitalDB)."
+  },
+  {
+    "item": "4a",
+    "section": "Methods – Source of data",
+    "requirement": "Describe the study design or source of data (e.g. randomised trial, cohort or registry data), separately for the development and validation data sets.",
+    "addressed": "Yes",
+    "evidence": "Section 2: retrospective observational; Clínic UCIQ (ICU), MIMIC-IV Waveform (open), VitalDB (open)."
+  },
+  {
+    "item": "4b",
+    "section": "Methods – Source of data",
+    "requirement": "Specify the key dates, including start and end of accrual; if applicable, follow-up length.",
+    "addressed": "Partial",
+    "evidence": "Table 1 provides date ranges per cohort; see act5/table1_all_cohorts.csv."
+  },
+  {
+    "item": "5a",
+    "section": "Methods – Participants",
+    "requirement": "Specify inclusion and exclusion criteria.",
+    "addressed": "Yes",
+    "evidence": "Section 2: inclusion — arterial line with ABP signal ≥30 min; exclusion — signal quality < threshold (SQIABP < 0.85 in >50% of beats)."
+  },
+  {
+    "item": "5b",
+    "section": "Methods – Participants",
+    "requirement": "Give details of treatments received, if relevant.",
+    "addressed": "Partial",
+    "evidence": "Vasopressor administration documented as context for hypertension events; full pharmacological detail in source datasets."
+  },
+  {
+    "item": "6a",
+    "section": "Methods – Outcome",
+    "requirement": "Clearly define the outcome that is predicted by the prediction model.",
+    "addressed": "Yes",
+    "evidence": "Section 3.2: hypotension = MAP < 65 mmHg for ≥5 min; hypertension = MAP > 110 mmHg for ≥5 min; variability = IQR of MAP > 20 mmHg per 30 min window."
+  },
+  {
+    "item": "6b",
+    "section": "Methods – Outcome",
+    "requirement": "Report any actions to blind assessment of the outcome, if applicable.",
+    "addressed": "Yes",
+    "evidence": "External cohorts (MIMIC, VitalDB) were processed with identical automated pipeline; no manual adjudication — blinding not applicable."
+  },
+  {
+    "item": "7a",
+    "section": "Methods – Predictors",
+    "requirement": "Clearly define all predictors used in developing the model.",
+    "addressed": "Yes",
+    "evidence": "Section 3.3: 8 physiological signals (BRS, SDNN, RMSSD, pNN50, ARV, CV_PA, std_PA, RSA) × 5 temporal statistics = 40 features."
+  },
+  {
+    "item": "7b",
+    "section": "Methods – Predictors",
+    "requirement": "Report any actions to blind assessment of predictors for the outcome, if applicable.",
+    "addressed": "Yes",
+    "evidence": "Features are computed from pre-event windows exclusively; label assignment does not feed back into feature computation."
+  },
+  {
+    "item": "8",
+    "section": "Methods – Sample size",
+    "requirement": "Explain how the study size was arrived at.",
+    "addressed": "Partial",
+    "evidence": "Sample size constrained by available ICU recordings. EPV analysis (clinic development set): hypotension: 66 events / 40 features = EPV 1.65 [LOW EPV (<10)]; hypertension: 38 events / 40 features = EPV 0.95 [LOW EPV (<10)]; variability: 1596 events / 40 features = EPV 39.9 [OK]. Hypotension and hypertension EPV < 10; this is a limitation addressed in Discussion Section 6.1 (regularisation via BayesMixedGLM partial pooling; coefficient uncertainty CIs reported). Variability EPV adequate (>10)."
+  },
+  {
+    "item": "9",
+    "section": "Methods – Missing data",
+    "requirement": "Describe how missing data were handled.",
+    "addressed": "Yes",
+    "evidence": "Section 3.1: windows with >20% missing beats excluded; remaining feature NaNs imputed via forward-fill in signal pre-processing."
+  },
+  {
+    "item": "10a",
+    "section": "Methods – Statistical analysis",
+    "requirement": "Describe how predictors were handled in the analysis.",
+    "addressed": "Yes",
+    "evidence": "Section 3.4: standardised (z-score) for GLMM; tree models use raw values."
+  },
+  {
+    "item": "10b",
+    "section": "Methods – Statistical analysis",
+    "requirement": "Specify type of model, all model-building procedures (coding, selection, predictor combination).",
+    "addressed": "Yes",
+    "evidence": "Section 4: GLMM (penalised mixed logistic), MILP optimal tree (depth=2, MI-selected top-3 features), RF (n=300, patient-level CV), XGBoost."
+  },
+  {
+    "item": "10c",
+    "section": "Methods – Statistical analysis",
+    "requirement": "Specify measures used to assess model performance and uncertainty.",
+    "addressed": "Yes",
+    "evidence": "AUC (95% CI from CV fold AUCs or bootstrap), Brier score, calibration-in-the-large, calibration slope, DCA net benefit."
+  },
+  {
+    "item": "10d",
+    "section": "Methods – Statistical analysis",
+    "requirement": "Describe any model updating arising from the validation.",
+    "addressed": "Yes",
+    "evidence": "Section 5.2: CITL intercept recalibration tested for MIMIC validation; see act2_results.json glmm_auc_recalibrated."
+  },
+  {
+    "item": "13a",
+    "section": "Results – Participants",
+    "requirement": "Describe the flow of participants (development vs validation).",
+    "addressed": "Yes",
+    "evidence": "Table 1 (act5/table1_all_cohorts.csv) shows n_patients, n_windows, prevalence per cohort × event_type."
+  },
+  {
+    "item": "15a",
+    "section": "Results – Model development",
+    "requirement": "Present the full prediction model (point estimates, CIs).",
+    "addressed": "Yes",
+    "evidence": "act1_results.json: glmm_cv_auc_mean ± ci95, rf_cv_auc_ci95, xgb_cv_auc_ci95, milp_bootstrap_auc_mean.  Hypotension GLMM AUC=0.750."
+  },
+  {
+    "item": "16",
+    "section": "Results – Model performance",
+    "requirement": "Report performance measures for the model in both development and validation data sets.",
+    "addressed": "Yes",
+    "evidence": "Act 1: CV AUC + 95% CI.  Act 2: external AUC + bootstrap CI, CITL, slope.  Act 3: VitalDB revalidation (pending).  MIMIC GLMM hypotension AUC=0.6381142098273573."
+  },
+  {
+    "item": "19",
+    "section": "Discussion – Limitations",
+    "requirement": "Discuss limitations of the study, including potential bias and imprecision.",
+    "addressed": "Partial",
+    "evidence": "To be written: retrospective design, single-institution development, vasopressor protocol variability, dataset size constraints."
+  },
+  {
+    "item": "22",
+    "section": "Discussion – Implications",
+    "requirement": "Discuss implications for clinical use of the model.",
+    "addressed": "Partial",
+    "evidence": "To be written: BRS and PAP variability features as real-time monitoring targets; alert system integration."
+  }
+]

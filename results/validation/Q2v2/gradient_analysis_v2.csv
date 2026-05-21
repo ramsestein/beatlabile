@@ -1,0 +1,6 @@
+feature,feature_name,agg,beta_interescalenico,p_gradient
+ptt_cv__mean,ptt_cv,mean,0.21003446735434686,0.13960141377669372
+ptt_cv__std,ptt_cv,std,0.03384743262091917,0.6427156980450988
+ptt_std__max,ptt_std,max,44.277195185438465,0.6021532425830245
+pai_mean__mean,pai_mean,mean,5.413040782954974,0.05980039613877382
+brs_seq__min,brs_seq,min,-0.14357933987492644,0.47396431300836783

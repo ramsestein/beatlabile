@@ -1,0 +1,23 @@
+# Dependencias para el sub-estudio Q1 (validación hombro)
+# Instalar con: pip install -r validation/requirements.txt
+
+# Lectura de archivos .vital
+vitaldb>=1.4.13
+
+# Procesado de señales fisiológicas
+neurokit2>=0.2.7
+
+# Análisis numérico y estadística
+numpy>=1.24.0
+scipy>=1.11.0
+statsmodels>=0.14.0
+pandas>=2.0.0
+
+# Visualización
+matplotlib>=3.7.0
+
+# Persistencia
+pyarrow>=14.0.0    # para .parquet
+
+# Lectura de Excel (.xlsx)
+openpyxl>=3.1.0

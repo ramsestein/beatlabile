@@ -1,0 +1,36 @@
+{
+  "hypotension": {
+    "n_events_oof": 66,
+    "n_controls_oof": 885,
+    "auc_conventional_cv": 0.7618,
+    "auc_glmm_pars_cv": 0.6225,
+    "nri_continuous_cv": 0.1601,
+    "idi_cv": -0.0324,
+    "nri_ci95": [
+      0.003,
+      0.463
+    ],
+    "idi_ci95": [
+      -0.077,
+      0.071
+    ],
+    "note": "NRI/IDI computed on out-of-fold (OOF) predictions from patient-level 5-fold CV. CI via patient-cluster bootstrap (B=500)."
+  },
+  "hypertension": {
+    "n_events_oof": 38,
+    "n_controls_oof": 885,
+    "auc_conventional_cv": 0.9314,
+    "auc_glmm_pars_cv": 0.7993,
+    "nri_continuous_cv": 0.1518,
+    "idi_cv": -0.0854,
+    "nri_ci95": [
+      -0.061,
+      0.501
+    ],
+    "idi_ci95": [
+      -0.147,
+      0.027
+    ],
+    "note": "NRI/IDI computed on out-of-fold (OOF) predictions from patient-level 5-fold CV. CI via patient-cluster bootstrap (B=500)."
+  }
+}

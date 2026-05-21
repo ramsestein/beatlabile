@@ -1,0 +1,3 @@
+Threshold,Prevalence Clínic (%),Prevalence VitalDB (%),GLMM AUC VitalDB,GLMM 95% CI,MILP Sensitivity,MILP Specificity,MILP PPV,MILP NPV
+MAP<55 mmHg ≥3 min,7.0,51.1,0.844,[0.806–0.883],0.513,0.77,0.716,0.584
+MAP<65 mmHg ≥3 min,34.1,76.5,0.715,[0.662–0.767],0.375,0.817,0.872,0.283
