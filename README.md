@@ -49,6 +49,7 @@ experiments/         Reproducible analysis scripts (one per Act / figure)
   audit_suppression.py             Supp — univariate vs multivariate sign-flip audit
   subtype_analysis.py              Supp — hypotension subtype separation (baroreflex axis)
   delta_event_control.py           Supp — deterioration gradient Clínic vs VitalDB
+  map_slope_control.py             Supp — MAP slope as predictive control (vs autonomic)
 
 figures/             Shared plotting utilities
 results/             All outputs (CSVs, JSONs, PKLs, PDFs)
@@ -476,6 +477,36 @@ Gradient test (Clínic − VitalDB):
 
 Outputs → `results/supplementary/delta_event_control.csv`,
 `results/supplementary/delta_event_control_gradient.csv`
+
+### S5 — MAP slope as predictive control
+
+`experiments/map_slope_control.py`
+
+Downloads raw `Solar8000/ART_MBP` (1 Hz) via the VitalDB API for all 1 080 cohort cases and
+computes seven MAP-derived features over the 30-minute prediction window:
+`map_mean`, `map_slope` (mmHg/min, OLS), `map_slope_last10` (last 10 min), `map_std`,
+`map_end_mean`, `map_start_mean`, `map_end_vs_start`. Compares their predictive AUC
+(bootstrap CI, B=1 000) against the parsimonious autonomic composite.
+
+| Outcome | Model | AUC | 95% CI |
+|---------|-------|:---:|:------:|
+| Hypotension | MAP_composite (univariate best: map_std=0.672, map_slope=0.645) | 0.715 | [0.683–0.746] |
+| Hypotension | Autonomic_composite | **0.775** | [0.747–0.804] |
+| Hypotension | MAP + Autonomic combined | **0.810** | [0.782–0.837] |
+| Hypertension | MAP_composite (best: map_slope=0.744) | 0.787 | [0.725–0.844] |
+| Hypertension | Autonomic_composite | **0.848** | [0.795–0.891] |
+| Hypertension | MAP + Autonomic combined | **0.887** | [0.849–0.920] |
+
+Key findings:
+- `map_mean` AUC ≈ 0.52–0.58: MAP level is **not yet abnormal** 30 min before the event
+- `map_slope` and `map_std` have genuine predictive signal (AUC 0.645/0.744), but are
+  **inferior to the autonomic composite** in both outcomes
+- MAP + autonomic combined > either alone (non-redundant axes)
+- **Conclusion**: autonomic features capture deterioration that is not visible in the MAP
+  trend, validating the physiological claim of the study
+
+Outputs → `results/supplementary/map_slope_features.parquet` (cached per-window features),
+`results/supplementary/map_slope_auc_comparison.csv`
 
 ---
 
