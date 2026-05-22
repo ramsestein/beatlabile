@@ -1,0 +1,3 @@
+cohort,outcome,model_A,model_B,auc_A,auc_B,delta_AUC,z,p_delong,n,n_event
+clinic,hypotension,MAP+variabilidad,MAP_solo,0.775,0.574,0.202,5.856,0.0,881,76
+clinic,hypertension,MAP+variabilidad,MAP_solo,0.966,0.824,0.142,3.221,0.0013,850,36

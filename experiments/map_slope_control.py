@@ -3,26 +3,30 @@
 """
 MAP SLOPE COMO CONTROL PREDICTIVO — ¿Cuánto del AUC es ya visible en la tendencia MAP?
 ========================================================================================
-Experimento de control: calcula features de la MAP cruda (Solar8000/ART_MBP a 1 Hz)
-sobre la ventana de predicción [window_start_s, window_end_s] para cada ventana del
-parquet de VitalDB.  Compara el potencial predictivo (AUC en hipotensión e hipertensión)
-de estas features de MAP contra las features autonómicas del modelo parsimónico.
+Experimento de control: calcula features de la MAP cruda a 1 Hz sobre la ventana de
+predicción [window_start_s, window_end_s] para cada ventana de VitalDB y Clínic.
+Compara el potencial predictivo (AUC) de las features de MAP vs las features autonómicas
+del modelo parsimónico, usando el test de DeLong pareado (mismos pacientes).
+
+VitalDB: Solar8000/ART_MBP descargado vía API
+Clínic : Intellivue/ABP_MEAN de ficheros .vital locales
 
 Features de MAP calculadas:
-  map_mean       : media de MAP en la ventana (nivel basal)
-  map_slope      : pendiente lineal (mmHg/min) — negativa = MAP bajando
-  map_slope_last10 : pendiente en los últimos 10 min (señal más reciente)
-  map_std        : desviación estándar de MAP en la ventana
-  map_end_mean   : media de MAP en los últimos 5 min
-  map_start_mean : media de MAP en los primeros 5 min
-  map_end_vs_start: map_end_mean - map_start_mean (cambio total)
+  map_mean         : media de MAP en la ventana (nivel basal)
+  map_slope        : pendiente lineal (mmHg/min)
+  map_slope_last10 : pendiente en los últimos 10 min
+  map_std          : desviación estándar de MAP
+  map_end_mean     : media de MAP en los últimos 5 min
+  map_start_mean   : media de MAP en los primeros 5 min
+  map_end_vs_start : map_end_mean - map_start_mean
 
 Outputs:
-  results/supplementary/map_slope_features.parquet   — features por ventana
-  results/supplementary/map_slope_auc_comparison.csv — AUC MAP vs autonomic
+  results/supplementary/map_slope_features_{cohort}.parquet
+  results/supplementary/map_slope_auc_comparison_v2.csv
 """
 
 import argparse
+import glob
 import numpy as np
 import pandas as pd
 from scipy import stats
@@ -33,9 +37,15 @@ from pathlib import Path
 import warnings
 warnings.filterwarnings("ignore")
 
-CACHE_PATH   = Path("results/supplementary/map_slope_features.parquet")
-WINDOWS_PATH = Path("results/cache/vitaldb_windows.parquet")
-OUTCOMES     = ["hypotension", "hypertension"]
+VITALDB_CACHE  = Path("results/supplementary/map_slope_features_vitaldb.parquet")
+CLINIC_CACHE   = Path("results/supplementary/map_slope_features_clinic.parquet")
+VITALDB_WINS   = Path("results/cache/vitaldb_windows.parquet")
+CLINIC_WINS    = Path("results/cache/clinic_windows.parquet")
+CLINIC_ROOT    = Path("clinic")
+OUTCOMES       = ["hypotension", "hypertension"]
+
+# Clinic MAP track (Intellivue monitor)
+CLINIC_MAP_TRACK = "Intellivue/ABP_MEAN"
 
 PARSIMONIOUS = {
     "hypotension":  ["std_pa_mean", "cv_pa_std", "rsa_max", "arv_std",
@@ -75,7 +85,7 @@ def extract_map_features(arr, window_len_s=1800):
         "map_end_vs_start":  _safe_mean(last5) - _safe_mean(first5),
     }
 
-# ── download & compute ─────────────────────────────────────────────────────────
+# ── download & compute (VitalDB) ───────────────────────────────────────────────
 def build_map_features(windows: pd.DataFrame, verbose=True) -> pd.DataFrame:
     """Download ART_MBP for each patient and compute MAP features per window."""
     import vitaldb
@@ -116,6 +126,143 @@ def build_map_features(windows: pd.DataFrame, verbose=True) -> pd.DataFrame:
     return pd.DataFrame(results)
 
 
+# ── clinic MAP feature builder ─────────────────────────────────────────────────
+def _build_patient_file_index(clinic_root: Path) -> dict:
+    """Return {patient_id: [path, ...]} mapping for all .vital files under clinic_root.
+
+    Deduplicates by filename (same file may appear in multiple box subdirectories).
+    Patient ID is identified as a 6-digit directory component in the path.
+    """
+    all_vitals = glob.glob(str(clinic_root / "**" / "*.vital"), recursive=True)
+    seen: set = set()
+    patient_files: dict = {}
+    for v in all_vitals:
+        name = Path(v).name
+        if name in seen:
+            continue
+        seen.add(name)
+        for part in Path(v).parts:
+            if len(part) == 6 and part.isdigit():
+                patient_files.setdefault(part, []).append(v)
+                break
+    return patient_files
+
+
+def build_map_features_clinic(windows: pd.DataFrame, clinic_root: Path = CLINIC_ROOT,
+                               verbose=True) -> pd.DataFrame:
+    """Load Intellivue/ABP_MEAN from local .vital files and compute MAP features."""
+    import vitaldb as vdb
+
+    patient_files = _build_patient_file_index(clinic_root)
+    results = []
+    pids = windows["patient_id"].unique()
+    n = len(pids)
+
+    for i, pid in enumerate(pids):
+        if verbose and (i % 50 == 0 or i == 0):
+            print(f"  [{i+1}/{n}] patient {pid}", flush=True)
+
+        files = patient_files.get(str(pid), [])
+        if not files:
+            continue
+
+        # Load ABP_MEAN 1-Hz arrays for every file of this patient
+        file_arrays: list = []
+        for fp in files:
+            try:
+                vf = vdb.VitalFile(fp)
+                if CLINIC_MAP_TRACK not in vf.get_track_names():
+                    continue
+                arr = vf.to_numpy(CLINIC_MAP_TRACK, interval=1.0)
+                arr = np.asarray(arr).ravel().astype(float)
+                arr[(arr < 20) | (arr > 250)] = np.nan
+                if np.sum(~np.isnan(arr)) > 60:   # skip near-empty files
+                    file_arrays.append(arr)
+            except Exception:
+                continue
+
+        if not file_arrays:
+            continue
+
+        # Sort by descending length so we try the longest file first
+        file_arrays.sort(key=len, reverse=True)
+
+        pt_wins = windows[windows["patient_id"] == pid]
+        for _, row in pt_wins.iterrows():
+            ws_float = float(row["window_start_s"])
+            ws = int(ws_float)
+            we = int(float(row["window_end_s"]))
+            win_len = we - ws
+
+            seg = None
+            for arr in file_arrays:
+                if ws >= len(arr):
+                    continue
+                candidate = arr[ws: min(we, len(arr))]
+                if np.sum(~np.isnan(candidate)) >= 0.5 * win_len:
+                    seg = candidate
+                    break
+
+            if seg is None:
+                continue
+
+            feats = extract_map_features(seg)
+            feats["patient_id"]     = row["patient_id"]
+            feats["event_type"]     = row["event_type"]
+            feats["label"]          = int(row["label"])
+            feats["window_start_s"] = ws_float
+            results.append(feats)
+
+    return pd.DataFrame(results)
+
+
+# ── DeLong paired AUC test ─────────────────────────────────────────────────────
+def delong_paired_test(y_true, prob1, prob2):
+    """Paired DeLong test: H\u2080: AUC(prob1) = AUC(prob2) on identical observations.
+
+    Implements the FastDeLong estimator (Sun & Xu 2014, IEEE Signal Proc.).
+    Returns (auc1, auc2, delta_auc, z, p_two_sided).
+    """
+    y = np.asarray(y_true, dtype=int)
+    p1 = np.asarray(prob1, dtype=float)
+    p2 = np.asarray(prob2, dtype=float)
+    mask = ~np.isnan(p1) & ~np.isnan(p2) & (y == y)  # drops NaN labels too
+    y, p1, p2 = y[mask], p1[mask], p2[mask]
+
+    pos = np.where(y == 1)[0]
+    neg = np.where(y == 0)[0]
+    n_pos, n_neg = len(pos), len(neg)
+    if n_pos == 0 or n_neg == 0:
+        return np.nan, np.nan, np.nan, np.nan, np.nan
+
+    def _placements(probs):
+        """Return (auc, V10, V01) using vectorised kernel."""
+        p_pos = probs[pos]          # (n_pos,)
+        p_neg = probs[neg]          # (n_neg,)
+        diff = p_pos[:, None] - p_neg[None, :]          # (n_pos, n_neg)
+        psi = (diff > 0).astype(float) + 0.5 * (diff == 0).astype(float)
+        V10 = psi.mean(axis=1)      # mean over controls for each case
+        V01 = psi.mean(axis=0)      # mean over cases for each control
+        return psi.mean(), V10, V01
+
+    auc1, V10_1, V01_1 = _placements(p1)
+    auc2, V10_2, V01_2 = _placements(p2)
+
+    # Covariance structure of (AUC1 - AUC2)
+    var1  = np.var(V10_1, ddof=1) / n_pos + np.var(V01_1, ddof=1) / n_neg
+    var2  = np.var(V10_2, ddof=1) / n_pos + np.var(V01_2, ddof=1) / n_neg
+    cov12 = (np.cov(V10_1, V10_2, ddof=1)[0, 1] / n_pos +
+             np.cov(V01_1, V01_2, ddof=1)[0, 1] / n_neg)
+
+    var_delta = var1 + var2 - 2 * cov12
+    if var_delta <= 0:
+        return auc1, auc2, auc1 - auc2, np.nan, np.nan
+
+    z = (auc1 - auc2) / np.sqrt(var_delta)
+    p = float(2 * stats.norm.sf(abs(z)))
+    return float(auc1), float(auc2), float(auc1 - auc2), float(z), p
+
+
 # ── evaluation ─────────────────────────────────────────────────────────────────
 def auc_ci(y, x, B=1000, seed=0):
     """Pooled AUC with 1000-sample bootstrap CI."""
@@ -131,108 +278,180 @@ def auc_ci(y, x, B=1000, seed=0):
     return base, np.percentile(boots, 2.5), np.percentile(boots, 97.5)
 
 
-def compare_aucs(windows: pd.DataFrame, map_df: pd.DataFrame) -> pd.DataFrame:
-    """Build AUC comparison table: MAP features vs parsimonious autonomic features."""
+def compare_aucs(windows: pd.DataFrame, map_df: pd.DataFrame,
+                 cohort: str = "cohort", B: int = 500) -> pd.DataFrame:
+    """AUC comparison table with paired DeLong tests on common observations.
+
+    For each outcome the paired DeLong tests compare:
+      - MAP_composite  vs  autonomic_composite  (MAP alone vs autonomic alone)
+      - MAP+autonomic  vs  autonomic_composite  (incremental value of adding MAP)
+    Both tests use the same observation set (windows that have all required features).
+    """
     merged = windows.merge(
-        map_df[["patient_id", "event_type", "window_start_s"] + MAP_FEATURES + ["map_end_mean", "map_start_mean"]],
+        map_df[["patient_id", "event_type", "window_start_s"]
+               + MAP_FEATURES + ["map_end_mean", "map_start_mean"]],
         on=["patient_id", "event_type", "window_start_s"], how="left"
     )
     rows = []
+    delong_rows = []
+
     for outcome in OUTCOMES:
         sub = merged[merged["event_type"] == outcome].dropna(subset=["label"])
-        y = sub["label"].astype(int).values
+        y_all = sub["label"].astype(int).values
 
-        # --- MAP features ---
+        # --- Univariate MAP features ---
         for f in MAP_FEATURES + ["map_end_mean", "map_start_mean"]:
-            auc, lo, hi = auc_ci(y, sub[f].values)
-            rows.append(dict(outcome=outcome, axis="MAP_signal", feature=f,
-                             auc=round(auc, 3), ci_lo=round(lo, 3), ci_hi=round(hi, 3),
-                             n_event=int(y.sum()), n_control=int((y==0).sum())))
+            auc, lo, hi = auc_ci(y_all, sub[f].values, B=B)
+            rows.append(dict(cohort=cohort, outcome=outcome, axis="MAP_signal",
+                             feature=f, auc=round(auc, 3),
+                             ci_lo=round(lo, 3), ci_hi=round(hi, 3),
+                             n_event=int(y_all.sum()),
+                             n_control=int((y_all == 0).sum())))
 
-        # MAP composite (multivariate logistic on all MAP features)
-        map_feats = [f for f in MAP_FEATURES if f in sub.columns]
-        sub_map = sub[map_feats + ["label"]].dropna()
-        if len(sub_map) > 10:
-            sc = StandardScaler()
-            Xm = sc.fit_transform(sub_map[map_feats].values)
-            ym = sub_map["label"].astype(int).values
-            lr = LogisticRegression(max_iter=1000).fit(Xm, ym)
-            auc, lo, hi = auc_ci(ym, lr.predict_proba(Xm)[:, 1])
-            rows.append(dict(outcome=outcome, axis="MAP_signal", feature="MAP_composite",
-                             auc=round(auc, 3), ci_lo=round(lo, 3), ci_hi=round(hi, 3),
-                             n_event=int(ym.sum()), n_control=int((ym==0).sum())))
-
-        # --- Autonomic parsimonious features (univariate) ---
+        # --- Univariate autonomic features ---
         for f in PARSIMONIOUS[outcome]:
             if f not in sub.columns:
                 continue
-            auc, lo, hi = auc_ci(y, sub[f].values)
-            rows.append(dict(outcome=outcome, axis="autonomic", feature=f,
-                             auc=round(auc, 3), ci_lo=round(lo, 3), ci_hi=round(hi, 3),
-                             n_event=int(y.sum()), n_control=int((y==0).sum())))
+            auc, lo, hi = auc_ci(y_all, sub[f].values, B=B)
+            rows.append(dict(cohort=cohort, outcome=outcome, axis="autonomic",
+                             feature=f, auc=round(auc, 3),
+                             ci_lo=round(lo, 3), ci_hi=round(hi, 3),
+                             n_event=int(y_all.sum()),
+                             n_control=int((y_all == 0).sum())))
 
-        # Autonomic composite
+        # ── Composite models on the COMMON observation set ──────────────────
+        map_feats = [f for f in MAP_FEATURES if f in sub.columns]
         par_feats = [f for f in PARSIMONIOUS[outcome] if f in sub.columns]
-        sub_par = sub[par_feats + ["label"]].dropna()
-        if len(sub_par) > 10:
-            sc = StandardScaler()
-            Xa = sc.fit_transform(sub_par[par_feats].values)
-            ya = sub_par["label"].astype(int).values
-            lr = LogisticRegression(max_iter=1000).fit(Xa, ya)
-            auc, lo, hi = auc_ci(ya, lr.predict_proba(Xa)[:, 1])
-            rows.append(dict(outcome=outcome, axis="autonomic", feature="autonomic_composite",
-                             auc=round(auc, 3), ci_lo=round(lo, 3), ci_hi=round(hi, 3),
-                             n_event=int(ya.sum()), n_control=int((ya==0).sum())))
+        all_feats = map_feats + par_feats
 
-        # MAP + Autonomic combined
-        all_feats = [f for f in (map_feats + par_feats) if f in sub.columns]
-        sub_all = sub[all_feats + ["label"]].dropna()
-        if len(sub_all) > 10:
-            sc = StandardScaler()
-            Xc = sc.fit_transform(sub_all[all_feats].values)
-            yc = sub_all["label"].astype(int).values
-            lr = LogisticRegression(max_iter=1000).fit(Xc, yc)
-            auc, lo, hi = auc_ci(yc, lr.predict_proba(Xc)[:, 1])
-            rows.append(dict(outcome=outcome, axis="combined", feature="MAP+autonomic_composite",
-                             auc=round(auc, 3), ci_lo=round(lo, 3), ci_hi=round(hi, 3),
-                             n_event=int(yc.sum()), n_control=int((yc==0).sum())))
+        # Common set: windows where BOTH map AND autonomic features are present
+        sub_common = sub[all_feats + ["label"]].dropna()
+        if len(sub_common) < 20:
+            continue
+        y_c = sub_common["label"].astype(int).values
 
-    return pd.DataFrame(rows)
+        sc = StandardScaler()
+
+        # MAP composite on common set
+        Xm = sc.fit_transform(sub_common[map_feats].values)
+        lr_map = LogisticRegression(max_iter=1000).fit(Xm, y_c)
+        score_map = lr_map.predict_proba(Xm)[:, 1]
+        auc_m, lo_m, hi_m = auc_ci(y_c, score_map, B=B)
+        rows.append(dict(cohort=cohort, outcome=outcome, axis="MAP_signal",
+                         feature="MAP_composite", auc=round(auc_m, 3),
+                         ci_lo=round(lo_m, 3), ci_hi=round(hi_m, 3),
+                         n_event=int(y_c.sum()), n_control=int((y_c == 0).sum())))
+
+        # Autonomic composite on common set
+        Xa = sc.fit_transform(sub_common[par_feats].values)
+        lr_aut = LogisticRegression(max_iter=1000).fit(Xa, y_c)
+        score_aut = lr_aut.predict_proba(Xa)[:, 1]
+        auc_a, lo_a, hi_a = auc_ci(y_c, score_aut, B=B)
+        rows.append(dict(cohort=cohort, outcome=outcome, axis="autonomic",
+                         feature="autonomic_composite", auc=round(auc_a, 3),
+                         ci_lo=round(lo_a, 3), ci_hi=round(hi_a, 3),
+                         n_event=int(y_c.sum()), n_control=int((y_c == 0).sum())))
+
+        # MAP + Autonomic combined on common set
+        Xc = sc.fit_transform(sub_common[all_feats].values)
+        lr_comb = LogisticRegression(max_iter=1000).fit(Xc, y_c)
+        score_comb = lr_comb.predict_proba(Xc)[:, 1]
+        auc_comb, lo_comb, hi_comb = auc_ci(y_c, score_comb, B=B)
+        rows.append(dict(cohort=cohort, outcome=outcome, axis="combined",
+                         feature="MAP+autonomic_composite", auc=round(auc_comb, 3),
+                         ci_lo=round(lo_comb, 3), ci_hi=round(hi_comb, 3),
+                         n_event=int(y_c.sum()), n_control=int((y_c == 0).sum())))
+
+        # ── DeLong paired test (primary) ─────────────────────────────────────
+        # H0: AUC(MAP+variabilidad) == AUC(MAP-solo) on the SAME N windows.
+        # score_comb and score_map are both predicted on sub_common, so the
+        # two ROC curves are correlated — this is the correct paired test.
+        # δAUC > 0 means autonomic variables add information above raw MAP.
+        a1, a2, delta, z, p = delong_paired_test(y_c, score_comb, score_map)
+        delong_rows.append(dict(
+            cohort=cohort, outcome=outcome,
+            model_A="MAP+variabilidad", model_B="MAP_solo",
+            auc_A=round(a1, 3), auc_B=round(a2, 3),
+            delta_AUC=round(delta, 3), z=round(z, 3),
+            p_delong=round(p, 4), n=len(y_c),
+            n_event=int(y_c.sum())
+        ))
+
+    return pd.DataFrame(rows), pd.DataFrame(delong_rows)
 
 
 # ── main ───────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--rebuild", action="store_true",
-                    help="Force re-download even if cache exists")
-    ap.add_argument("--out", default="results/supplementary/map_slope_auc_comparison.csv")
+                    help="Force rebuild even if cache exists")
+    ap.add_argument("--cohorts", nargs="+", default=["vitaldb", "clinic"],
+                    choices=["vitaldb", "clinic"])
+    ap.add_argument("--out", default="results/supplementary/map_slope_auc_comparison_v2.csv")
+    ap.add_argument("--out-delong",
+                    default="results/supplementary/map_slope_delong_v2.csv")
     args = ap.parse_args()
 
-    windows = pd.read_parquet(WINDOWS_PATH)
+    all_auc_rows, all_delong_rows = [], []
 
-    if CACHE_PATH.exists() and not args.rebuild:
-        print(f"Loading cached MAP features from {CACHE_PATH}")
-        map_df = pd.read_parquet(CACHE_PATH)
-    else:
-        print(f"Downloading ART_MBP for {windows['patient_id'].nunique()} patients…")
-        map_df = build_map_features(windows)
-        map_df.to_parquet(CACHE_PATH, index=False)
-        print(f"Cached to {CACHE_PATH}  ({len(map_df)} rows)")
+    for cohort in args.cohorts:
+        print(f"\n{'='*60}")
+        print(f"  COHORT: {cohort.upper()}")
+        print(f"{'='*60}")
 
-    print(f"\nMAP features extracted: {len(map_df)} windows, "
-          f"{map_df['map_slope'].notna().sum()} with valid slope")
+        if cohort == "vitaldb":
+            wins_path  = VITALDB_WINS
+            cache_path = VITALDB_CACHE
+        else:
+            wins_path  = CLINIC_WINS
+            cache_path = CLINIC_CACHE
 
-    print("\nComputing AUC comparison…")
-    tab = compare_aucs(windows, map_df)
+        windows = pd.read_parquet(wins_path)
+        print(f"Windows: {len(windows)} rows, "
+              f"{windows['patient_id'].nunique()} patients")
 
-    pd.set_option("display.width", 180, "display.max_rows", 60)
-    print("\n=== AUC COMPARISON: MAP signal vs autonomic features ===\n")
-    for outcome in OUTCOMES:
-        sub = tab[tab["outcome"] == outcome].sort_values(["axis", "auc"], ascending=[True, False])
-        print(f"── {outcome.upper()} ──")
-        print(sub[["axis", "feature", "auc", "ci_lo", "ci_hi",
-                   "n_event", "n_control"]].to_string(index=False))
-        print()
+        if cache_path.exists() and not args.rebuild:
+            print(f"Loading cached MAP features from {cache_path}")
+            map_df = pd.read_parquet(cache_path)
+        else:
+            if cohort == "vitaldb":
+                print(f"Downloading ART_MBP for "
+                      f"{windows['patient_id'].nunique()} patients…")
+                map_df = build_map_features(windows)
+            else:
+                print(f"Loading ABP_MEAN from local .vital files for "
+                      f"{windows['patient_id'].nunique()} patients…")
+                map_df = build_map_features_clinic(windows)
 
-    tab.to_csv(args.out, index=False)
-    print(f"Saved to {args.out}")
+            cache_path.parent.mkdir(parents=True, exist_ok=True)
+            map_df.to_parquet(cache_path, index=False)
+            print(f"Cached to {cache_path}  ({len(map_df)} rows)")
+
+        print(f"MAP features: {len(map_df)} windows, "
+              f"{map_df['map_slope'].notna().sum()} with valid slope")
+
+        print("Computing AUC comparison + DeLong tests…")
+        tab, delong = compare_aucs(windows, map_df, cohort=cohort)
+        all_auc_rows.append(tab)
+        all_delong_rows.append(delong)
+
+        pd.set_option("display.width", 200, "display.max_rows", 80)
+        print(f"\n── AUC table ({cohort}) ──")
+        for outcome in OUTCOMES:
+            sub = (tab[tab["outcome"] == outcome]
+                   .sort_values(["axis", "auc"], ascending=[True, False]))
+            print(f"  {outcome.upper()}:")
+            print(sub[["axis", "feature", "auc", "ci_lo", "ci_hi",
+                        "n_event", "n_control"]].to_string(index=False))
+            print()
+
+        print(f"── DeLong paired tests ({cohort}) ──")
+        print(delong[["outcome", "model_A", "model_B", "auc_A", "auc_B",
+                       "delta_AUC", "z", "p_delong", "n"]].to_string(index=False))
+
+    # Combine and save
+    Path(args.out).parent.mkdir(parents=True, exist_ok=True)
+    pd.concat(all_auc_rows, ignore_index=True).to_csv(args.out, index=False)
+    print(f"\nAUC table saved → {args.out}")
+    pd.concat(all_delong_rows, ignore_index=True).to_csv(args.out_delong, index=False)
+    print(f"DeLong table saved → {args.out_delong}")
