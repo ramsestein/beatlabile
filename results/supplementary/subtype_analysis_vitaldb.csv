@@ -1,0 +1,22 @@
+feature,median_decomp,median_anesth,cohens_d,auc_subtype,separation,p,n_decomp,n_anesth,axis,definition
+brs_min,0.434,0.4707,0.15,0.497,0.007,0.876435339012613,239,708,baroreflex,PRIMARIA: vasopressor intraop (case-level)
+brs_mean,5.3231,4.88,0.078,0.531,0.062,0.1497450241842943,239,708,baroreflex,PRIMARIA: vasopressor intraop (case-level)
+brs_slope,0.0,0.0001,0.005,0.493,0.013,0.7575110541097867,237,703,baroreflex,PRIMARIA: vasopressor intraop (case-level)
+cv_pa_std,0.0248,0.0287,-0.28,0.439,0.122,0.0044619007215035925,244,728,variability,PRIMARIA: vasopressor intraop (case-level)
+std_pa_std,2.2976,2.4255,-0.196,0.474,0.053,0.21914215405577708,244,728,variability,PRIMARIA: vasopressor intraop (case-level)
+std_pa_max,22.3769,22.3231,-0.09,0.491,0.017,0.6877801235681983,249,739,variability,PRIMARIA: vasopressor intraop (case-level)
+arv_std,1.4546,1.4596,-0.029,0.496,0.008,0.8574883147461565,244,728,variability,PRIMARIA: vasopressor intraop (case-level)
+brs_min,0.4722,0.2609,0.067,0.631,0.262,0.03181941424613223,924,23,baroreflex,sensib.1: proximidad a inducción (≤15 min)
+brs_mean,4.9701,5.5124,0.124,0.488,0.024,0.844889530152239,924,23,baroreflex,sensib.1: proximidad a inducción (≤15 min)
+brs_slope,0.0,0.0025,-0.008,0.42,0.161,0.1875021044100844,917,23,baroreflex,sensib.1: proximidad a inducción (≤15 min)
+cv_pa_std,0.0268,0.0946,-1.123,0.271,0.459,4.7023111045702026e-05,945,27,variability,sensib.1: proximidad a inducción (≤15 min)
+std_pa_std,2.3321,9.2852,-0.914,0.313,0.374,0.0009031180211539258,945,27,variability,sensib.1: proximidad a inducción (≤15 min)
+std_pa_max,21.8392,76.8946,-0.751,0.321,0.357,0.0015195410644693015,961,27,variability,sensib.1: proximidad a inducción (≤15 min)
+arv_std,1.4492,2.2686,-0.85,0.323,0.354,0.0016831088640879577,945,27,variability,sensib.1: proximidad a inducción (≤15 min)
+brs_min,0.496,0.4636,-0.039,0.51,0.02,0.60558788050908,350,597,baroreflex,sensib.2: ASA≥3 o cirugía urgente
+brs_mean,6.2546,4.705,0.021,0.548,0.096,0.01401999616271874,350,597,baroreflex,sensib.2: ASA≥3 o cirugía urgente
+brs_slope,-0.0,0.0001,0.152,0.487,0.025,0.5156709398334436,345,595,baroreflex,sensib.2: ASA≥3 o cirugía urgente
+cv_pa_std,0.0355,0.0246,0.264,0.57,0.139,0.0002891420695050727,359,613,variability,sensib.2: ASA≥3 o cirugía urgente
+std_pa_std,2.9977,2.0621,0.206,0.557,0.115,0.0027411351193976975,359,613,variability,sensib.2: ASA≥3 o cirugía urgente
+std_pa_max,27.2534,19.772,0.168,0.546,0.092,0.0156610781089211,367,621,variability,sensib.2: ASA≥3 o cirugía urgente
+arv_std,1.5519,1.3839,0.179,0.554,0.107,0.005188474215377274,359,613,variability,sensib.2: ASA≥3 o cirugía urgente

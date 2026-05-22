@@ -1,0 +1,33 @@
+cohort,outcome,feature,univ_rho,univ_p,univ_auc,coef_parsimonious,coef_full,flip_parsimonious,flip_full,boot_sign_stability_pars,top_collinear,top_collinear_r,verdict
+VitalDB,hypotension,brs_min,-0.1322,4.512988785121502e-05,0.424,0.3405,0.4867,True,True,0.975,rsa_mean,0.104,SUPRESIÓN: inversión de signo univariante->multivariante
+VitalDB,hypotension,cv_pa_std,0.2644,5.1468006579072066e-17,0.653,-0.4427,-2.0725,True,True,0.96,std_pa_max,0.854,SUPRESIÓN: inversión de signo univariante->multivariante
+VitalDB,hypotension,std_pa_mean,0.2607,8.211400806069145e-17,0.651,0.601,0.9954,False,False,1.0,arv_mean,0.639,consistente
+VitalDB,hypotension,std_pa_max,0.2826,1.338265134617599e-19,0.663,0.3574,-1.3693,False,True,0.92,cv_pa_std,0.854,SUPRESIÓN: inversión de signo univariante->multivariante
+VitalDB,hypotension,rsa_max,0.1872,6.650039724808885e-09,0.608,0.3602,-0.6012,False,True,1.0,rsa_mean,0.633,SUPRESIÓN: inversión de signo univariante->multivariante
+VitalDB,hypotension,rsa_mean,0.1971,9.82928212691773e-10,0.614,-0.0406,-0.1034,True,True,0.69,rsa_max,0.633,SUPRESIÓN: inversión de signo univariante->multivariante
+VitalDB,hypotension,arv_std,0.3914,6.071393345061685e-37,0.726,1.1623,0.7247,False,False,1.0,std_pa_mean,0.391,consistente
+VitalDB,hypotension,arv_mean,0.1298,4.2709485976643354e-05,0.575,-0.3485,-1.3134,True,True,0.99,std_pa_mean,0.639,SUPRESIÓN: inversión de signo univariante->multivariante
+VitalDB,hypertension,std_pa_std,0.2603,4.977059157883541e-10,0.72,-2.2043,-1.2197,True,True,1.0,cv_pa_std,0.965,SUPRESIÓN: inversión de signo univariante->multivariante
+VitalDB,hypertension,cv_pa_std,0.2492,2.7333075484048124e-09,0.71,1.1134,-0.7183,False,True,0.98,std_pa_std,0.965,SUPRESIÓN: inversión de signo univariante->multivariante
+VitalDB,hypertension,brs_min,-0.1223,0.00432702867423543,0.395,-70.6043,-0.7022,False,False,1.0,std_pa_slope,-0.131,consistente
+VitalDB,hypertension,cv_pa_mean,0.1218,0.003945610515531227,0.603,0.029,0.2898,False,False,0.515,cv_pa_std,0.35,consistente
+VitalDB,hypertension,std_pa_max,0.2571,7.14157161220177e-10,0.718,1.2407,-0.1792,False,True,1.0,std_pa_std,0.951,SUPRESIÓN: inversión de signo univariante->multivariante
+VitalDB,hypertension,arv_std,0.3328,8.579602195962386e-16,0.781,1.0976,0.328,False,False,1.0,cv_pa_std,0.39,consistente
+VitalDB,hypertension,std_pa_slope,0.3076,1.3262518298253457e-13,0.76,1.1383,0.6845,False,False,1.0,brs_min,-0.131,consistente
+VitalDB,hypertension,sdnn_mean,0.1352,0.001370172383161149,0.614,0.4683,-0.0886,False,True,0.96,cv_pa_mean,0.136,SUPRESIÓN: inversión de signo univariante->multivariante
+Clinic,hypotension,brs_min,-0.1005,0.0022811248587664007,0.383,-0.2365,-0.2515,False,False,0.835,rsa_mean,0.195,consistente
+Clinic,hypotension,cv_pa_std,0.1798,2.893075127921224e-08,0.704,1.0792,-6.1855,False,True,0.985,std_pa_max,0.763,SUPRESIÓN: inversión de signo univariante->multivariante
+Clinic,hypotension,std_pa_mean,0.1443,7.863530278466034e-06,0.664,0.3519,-3.7235,False,True,0.835,arv_mean,0.743,SUPRESIÓN: inversión de signo univariante->multivariante
+Clinic,hypotension,std_pa_max,0.1461,6.107424071716378e-06,0.666,-0.6185,-10.2129,True,True,0.98,cv_pa_std,0.763,SUPRESIÓN: inversión de signo univariante->multivariante
+Clinic,hypotension,rsa_max,-0.0731,0.027729753011132324,0.418,-0.4532,-2.1581,False,False,0.935,rsa_mean,0.632,consistente
+Clinic,hypotension,rsa_mean,-0.0639,0.054333392363900126,0.428,-0.1894,-2.1823,False,False,0.765,rsa_max,0.632,consistente
+Clinic,hypotension,arv_std,0.1605,7.712875769174296e-07,0.682,0.0803,-0.7329,False,True,0.575,cv_pa_std,0.611,SUPRESIÓN: inversión de signo univariante->multivariante
+Clinic,hypotension,arv_mean,0.1059,0.0010717145947564686,0.62,0.112,0.1031,False,False,0.57,std_pa_mean,0.743,consistente
+Clinic,hypertension,std_pa_std,0.1716,1.864059136288562e-07,0.748,6.6613,7.975,False,False,0.995,cv_pa_std,0.958,consistente
+Clinic,hypertension,cv_pa_std,0.0955,0.003901083139707677,0.638,-5.8388,-12.4239,True,True,0.995,std_pa_std,0.958,SUPRESIÓN: inversión de signo univariante->multivariante
+Clinic,hypertension,brs_min,-0.069,0.03905538536739173,0.4,-110.3794,-4.6834,False,False,1.0,sdnn_mean,0.226,consistente
+Clinic,hypertension,cv_pa_mean,-0.0787,0.016738316790765838,0.386,-1.1923,-15.4259,False,False,1.0,arv_std,0.379,consistente
+Clinic,hypertension,std_pa_max,0.1567,1.70766224374431e-06,0.728,-1.9605,-5.4883,True,True,0.985,std_pa_std,0.913,SUPRESIÓN: inversión de signo univariante->multivariante
+Clinic,hypertension,arv_std,0.0808,0.01464914085982741,0.617,0.9264,4.9046,False,False,0.99,cv_pa_std,0.673,consistente
+Clinic,hypertension,std_pa_slope,0.0869,0.008887536834419972,0.625,0.2832,7.1148,False,False,0.875,sdnn_mean,-0.171,consistente
+Clinic,hypertension,sdnn_mean,0.058,0.0784189906497189,0.584,0.4388,12.7571,False,False,0.955,brs_min,0.226,consistente

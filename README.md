@@ -45,6 +45,10 @@ experiments/         Reproducible analysis scripts (one per Act / figure)
   milp_bootstrap_full.py  MILP stability B=500
   nri_idi_*.py       NRI/IDI incremental value
   composite_outcome.py    Composite haemodynamic lability outcome
+  ventilatory_context_analysis.py  Supp — cv–arv collinearity vs ventilatory context
+  audit_suppression.py             Supp — univariate vs multivariate sign-flip audit
+  subtype_analysis.py              Supp — hypotension subtype separation (baroreflex axis)
+  delta_event_control.py           Supp — deterioration gradient Clínic vs VitalDB
 
 figures/             Shared plotting utilities
 results/             All outputs (CSVs, JSONs, PKLs, PDFs)
@@ -364,6 +368,114 @@ Is cv_pa_mean ≤ 0.0525?
 > BeatLabile achieves performance comparable to published HPI validation studies (0.820)
 > using only 8 autonomic beat-by-beat metrics — no waveform morphology, no CO or SVR required
 > — while providing explicit, reproducible decision thresholds.
+
+---
+
+## Supplementary analyses
+
+Four post-hoc analyses addressing reviewer-level questions about collinearity, suppression,
+baroreflex subtypes, and cross-cohort deterioration gradients.
+
+### S1 — cv–arv collinearity vs ventilatory context
+
+`experiments/ventilatory_context_analysis.py`
+
+Investigates whether the Clínic–VitalDB gap in cv–arv Spearman r (0.85 vs 0.71) is explained
+by ventilatory regime (MV fraction, PEEP, spontaneous breathing proxy `rsa_mean`).
+
+Key findings:
+- Overall pooled Spearman r(cv_pa_mean, arv_mean): Clínic = **0.847**, VitalDB = **0.715** (Fisher Z p < 10⁻⁶⁰)
+- Restricting VitalDB to full-MV (General anaesthesia + IPPV track): r = 0.715 — **unchanged**
+- Per-patient r(rsa_mean, r_cv_arv) = 0.065, p = 0.28 — spontaneous-breathing fraction non-significant
+- **Ventilatory context does not explain the collinearity gap.**
+- The manuscript-cited Pearson r = 0.61/0.36 traces to `cv_pa_std × arv_std`, Pearson,
+  **hypotension windows only** (n=939/972) — the variability-of-variability dimension,
+  not the level features used in the models.
+
+Outputs → `results/supplementary/a1_cv_arv_ventilatory_strata.csv`,
+`a2_brs_min_stress_by_asa.csv`, `a3_cv_arv_regimestratified.csv`,
+`ventilatory_context_analysis.txt`
+
+### S2 — Suppression audit: univariate vs multivariate sign-flip
+
+`experiments/audit_suppression.py`
+
+For every feature in the parsimonious set, contrasts the univariate Spearman ρ (vs outcome)
+with the multivariate logistic regression coefficient to detect sign inversions (suppression).
+Includes 200-sample patient-clustered bootstrap sign-stability.
+
+Key findings across Clínic + VitalDB × hypotension + hypertension:
+- **8 suppression instances** detected (sign flip univariate → multivariate)
+- **Zero** "fabricated signs" (all features have |ρ_uni| > 0.02)
+- **brs_min in VitalDB-hypotension**: univariate ρ = **−0.132** (protector, p < 10⁻⁵),
+  multivariate coef = **+0.341** (inverted). Bootstrap stability = 97.5 % — the flip is
+  stable but artefactual (suppression mechanism: negative correlation with variability
+  features `arv_std`, `cv_pa_std`, `std_pa_max` which are themselves positive predictors)
+- brs_min in **Clínic-hypotension**: consistent, no flip (uni ρ = −0.10, multi = −0.237)
+- Most affected VitalDB pairs: `cv_pa_std ↔ std_pa_max` (r = 0.854), `std_pa_std ↔ cv_pa_std`
+  (r = 0.965 in hypertension)
+
+> **Implication**: the positive brs_min coefficient in VitalDB-hypotension is a suppression
+> artefact. The univariate direction (baroreflex attenuation as risk factor) is preserved
+> across both cohorts.
+
+Output → `results/supplementary/suppression_audit.csv`
+
+### S3 — Hypotension subtype separation (baroreflex axis)
+
+`experiments/subtype_analysis.py`
+
+Tests whether the baroreflex axis (brs_min, brs_mean, brs_slope) discriminates hypotension
+subtypes (decompensatory vs anaesthetic/iatrogenic) across three subtying definitions.
+
+Definitions (VitalDB):
+1. **Primary**: intraop vasopressor use (case-level proxy for iatrogenic hypotension)
+2. Sensitivity 1: proximity to induction (≤15 min vs later)
+3. Sensitivity 2: ASA ≥ 3 or emergency surgery (patient-level severity proxy)
+
+Key findings:
+- Baroreflex separation ≤ 0.15 (mean Cohen's d) across all three definitions
+- Variability axis separates subtypes, but in the **opposite direction**: higher variability
+  in peri-induction / "anaesthetic" windows (separation 0.39–0.46 for sensib.1)
+- **brs_min does not mark hypotension severity** in VitalDB — consistent with the suppression
+  finding (S2): the univariate baroreflex signal is masked by variability collinearity in this dataset
+
+Output → `results/supplementary/subtype_analysis_vitaldb.csv`
+
+### S4 — Deterioration gradient: Clínic vs VitalDB
+
+`experiments/delta_event_control.py`
+
+Computes Cohen's d and AUC of the pre-event deterioration (event windows vs matched controls)
+separately per cohort × outcome × axis. Cross-cohort gradient tested with B=1 000
+patient-clustered bootstrap (two-tailed).
+
+| Cohort | Outcome | Axis | d | 95 % CI | AUC |
+|--------|---------|------|:---:|:---:|:---:|
+| Clínic | Hypotension | Baroreflex | +0.100 | [0.06, 0.23] | 0.53 |
+| Clínic | Hypotension | Variability | +0.844 | [0.32, 1.61] | 0.70 |
+| VitalDB | Hypotension | Baroreflex | **−0.066** | [−0.24, 0.02] | 0.41 |
+| VitalDB | Hypotension | Variability | +0.494 | [0.37, 0.63] | 0.67 |
+| Clínic | Hypertension | Baroreflex | +0.106 | [0.07, 0.25] | 0.55 |
+| Clínic | Hypertension | Variability | +0.486 | [0.15, 1.06] | 0.68 |
+| VitalDB | Hypertension | Baroreflex | +0.023 | [−0.20, 0.16] | 0.50 |
+| VitalDB | Hypertension | Variability | +0.838 | [0.58, 1.12] | 0.74 |
+
+Gradient test (Clínic − VitalDB):
+
+| Outcome | Axis | Δd | 95 % CI | p_boot | Result |
+|---------|------|:---:|:---:|:---:|---|
+| Hypotension | **Baroreflex** | **+0.209** | [0.07, 0.38] | **< 0.001** | **Clínic > VitalDB** |
+| Hypotension | Variability | +0.368 | [−0.19, 1.12] | 0.256 | no concluyente |
+| Hypertension | Baroreflex | +0.114 | [−0.04, 0.37] | 0.128 | no concluyente |
+| Hypertension | Variability | −0.317 | [−0.81, 0.29] | 0.230 | no concluyente |
+
+> The only significant gradient is **baroreflex deterioration in hypotension** (p < 0.001).
+> Variability deterioration is a universal precursor (large d in both cohorts, no
+> significant inter-cohort difference). Hypertension shows no gradient on either axis.
+
+Outputs → `results/supplementary/delta_event_control.csv`,
+`results/supplementary/delta_event_control_gradient.csv`
 
 ---
 

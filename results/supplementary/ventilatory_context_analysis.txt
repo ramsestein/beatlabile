@@ -1,0 +1,24 @@
+VENTILATORY CONTEXT ANALYSIS — NARRATIVE SUMMARY
+======================================================================
+
+Question 1: Does the cv–arv colinearity gap (r≈0.71–0.93 clinic/MIMIC
+vs ≈0.71 VitalDB) reflect the ventilatory context?
+
+  • VitalDB General anesthesia alone: r=0.7145 (n=4471)
+  • VitalDB Full-MV only: r=0.7148 (n=4438)
+  • Per-patient r(rsa_mean, r_cv_arv) = 0.0648 (p=2.8239e-01)
+    Positive value → spontaneous breathing inflation of cv–arv coupling
+
+Question 2: Is brs_min sign/magnitude a marker of homeostatic stress?
+  • Spearman r(ASA, brs_min) = 0.0283 (p=6.5948e-02)
+  • Mann-Whitney emergency vs elective brs_min: p=7.5636e-02
+  • Mann-Whitney vasopressor vs none brs_min: p=8.5259e-01
+
+Question 3: cv flip under single-regime restriction
+  • Full-MV VitalDB vs Clinic: p_Fisher=1.8675e-59
+  • Full-MV VitalDB vs MIMIC:  p_Fisher=3.7959e-131
+
+See CSV files for full tables:
+  results/supplementary/a1_cv_arv_ventilatory_strata.csv
+  results/supplementary/a2_brs_min_stress_by_asa.csv
+  results/supplementary/a3_cv_arv_regimestratified.csv

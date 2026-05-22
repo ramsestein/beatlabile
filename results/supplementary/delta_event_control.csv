@@ -1,0 +1,9 @@
+cohort,outcome,axis,d_deterioration,ci95,auc,n_event,n_control
+Clinic,hypotension,baroreflex,0.1,"[0.06, 0.23]",0.533,61,858
+Clinic,hypotension,variability,0.844,"[0.32, 1.61]",0.699,66,885
+Clinic,hypertension,baroreflex,0.106,"[0.07, 0.25]",0.547,37,858
+Clinic,hypertension,variability,0.486,"[0.15, 1.06]",0.677,38,885
+VitalDB,hypotension,baroreflex,-0.066,"[-0.24, 0.02]",0.41,475,472
+VitalDB,hypotension,variability,0.494,"[0.37, 0.63]",0.667,505,483
+VitalDB,hypertension,baroreflex,0.023,"[-0.20, 0.16]",0.497,71,472
+VitalDB,hypertension,variability,0.838,"[0.58, 1.12]",0.739,75,483
