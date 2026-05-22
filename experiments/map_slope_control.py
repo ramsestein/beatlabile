@@ -8,8 +8,8 @@ predicción [window_start_s, window_end_s] para cada ventana de VitalDB y Clíni
 Compara el potencial predictivo (AUC) de las features de MAP vs las features autonómicas
 del modelo parsimónico, usando el test de DeLong pareado (mismos pacientes).
 
-VitalDB: Solar8000/ART_MBP descargado vía API
-Clínic : Intellivue/ABP_MEAN de ficheros .vital locales
+VitalDB: Solar8000/ART_MBP descargado vía API (vitaldb.load_case)
+Clínic : Intellivue/ABP_MEAN de ficheros .vital locales (vitaldb.VitalFile)
 
 Features de MAP calculadas:
   map_mean         : media de MAP en la ventana (nivel basal)
@@ -20,9 +20,27 @@ Features de MAP calculadas:
   map_start_mean   : media de MAP en los primeros 5 min
   map_end_vs_start : map_end_mean - map_start_mean
 
+Modelos compuestos — validación cruzada estratificada:
+  Los tres composites (MAP-solo, autonómico, MAP+variabilidad) se producen con
+  cross_val_predict + StratifiedKFold(5) con StandardScaler dentro de cada fold
+  (sin data leakage). Los scores out-of-fold se usan para AUC, CI bootstrap y
+  el test de DeLong pareado.
+
+Test de DeLong pareado (Sun & Xu 2014 FastDeLong):
+  H0: AUC(MAP+variabilidad) == AUC(MAP-solo) en las mismas N ventanas.
+  Los dos vectores de score provienen de los mismos folds CV → ROC correlacionadas
+  → test pareado correcto para ΔAUC.
+
+Resultados (AUC fuera de muestra, 5-fold CV):
+  VitalDB — Hipotensi.  MAP-solo=0.700  MAP+var=0.791  ΔAUC=+0.09  p<0.0001
+  VitalDB — Hipertensi. MAP-solo=0.728  MAP+var=0.837  ΔAUC=+0.11  p=0.0004
+  Clínic  — Hipotensi.  MAP-solo=0.546  MAP+var=0.757  ΔAUC=+0.21  p<0.0001
+  Clínic  — Hipertensi. MAP-solo=0.772  MAP+var=0.941  ΔAUC=+0.17  p=0.0005
+
 Outputs:
-  results/supplementary/map_slope_features_{cohort}.parquet
+  results/supplementary/map_slope_features_{vitaldb,clinic}.parquet
   results/supplementary/map_slope_auc_comparison_v2.csv
+  results/supplementary/map_slope_delong_v2.csv
 """
 
 import argparse
