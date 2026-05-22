@@ -31,6 +31,8 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 from sklearn.metrics import roc_auc_score
+from sklearn.model_selection import StratifiedKFold, cross_val_predict
+from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from pathlib import Path
@@ -278,14 +280,29 @@ def auc_ci(y, x, B=1000, seed=0):
     return base, np.percentile(boots, 2.5), np.percentile(boots, 97.5)
 
 
-def compare_aucs(windows: pd.DataFrame, map_df: pd.DataFrame,
-                 cohort: str = "cohort", B: int = 500) -> pd.DataFrame:
-    """AUC comparison table with paired DeLong tests on common observations.
+def _cv_scores(X: np.ndarray, y: np.ndarray, n_splits: int = 5,
+               seed: int = 0) -> np.ndarray:
+    """Return out-of-fold P(y=1) from stratified k-fold CV.
 
-    For each outcome the paired DeLong tests compare:
-      - MAP_composite  vs  autonomic_composite  (MAP alone vs autonomic alone)
-      - MAP+autonomic  vs  autonomic_composite  (incremental value of adding MAP)
-    Both tests use the same observation set (windows that have all required features).
+    StandardScaler is fitted inside each fold to prevent data leakage.
+    With small event counts (<50) the fold size is small but the estimate
+    is unbiased; use the same CV scheme for all composites so the three
+    score vectors align row-by-row for the DeLong paired test.
+    """
+    cv = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=seed)
+    pipe = make_pipeline(StandardScaler(),
+                         LogisticRegression(max_iter=1000, random_state=seed))
+    return cross_val_predict(pipe, X, y, cv=cv, method="predict_proba")[:, 1]
+
+
+def compare_aucs(windows: pd.DataFrame, map_df: pd.DataFrame,
+                 cohort: str = "cohort", B: int = 500, cv_folds: int = 5) -> pd.DataFrame:
+    """AUC comparison table with CROSS-VALIDATED composites and paired DeLong test.
+
+    All three composite scores (MAP-solo, autonomic, MAP+variabilidad) are
+    produced by 5-fold stratified CV so absolute AUC values are out-of-sample.
+    The DeLong test compares the two CV score vectors on the SAME observations,
+    preserving the paired (correlated-ROC) structure.
     """
     merged = windows.merge(
         map_df[["patient_id", "event_type", "window_start_s"]
@@ -329,34 +346,27 @@ def compare_aucs(windows: pd.DataFrame, map_df: pd.DataFrame,
         if len(sub_common) < 20:
             continue
         y_c = sub_common["label"].astype(int).values
+        if len(np.unique(y_c)) < 2:
+            continue
 
-        sc = StandardScaler()
+        # ── 5-fold CV composites (out-of-sample scores, no data leakage) ────
+        # All three models use the same CV splits so rows align for DeLong.
+        score_map  = _cv_scores(sub_common[map_feats].values,  y_c, cv_folds)
+        score_aut  = _cv_scores(sub_common[par_feats].values,  y_c, cv_folds)
+        score_comb = _cv_scores(sub_common[all_feats].values,  y_c, cv_folds)
 
-        # MAP composite on common set
-        Xm = sc.fit_transform(sub_common[map_feats].values)
-        lr_map = LogisticRegression(max_iter=1000).fit(Xm, y_c)
-        score_map = lr_map.predict_proba(Xm)[:, 1]
-        auc_m, lo_m, hi_m = auc_ci(y_c, score_map, B=B)
+        auc_m,    lo_m,    hi_m    = auc_ci(y_c, score_map,  B=B)
+        auc_a,    lo_a,    hi_a    = auc_ci(y_c, score_aut,  B=B)
+        auc_comb, lo_comb, hi_comb = auc_ci(y_c, score_comb, B=B)
+
         rows.append(dict(cohort=cohort, outcome=outcome, axis="MAP_signal",
                          feature="MAP_composite", auc=round(auc_m, 3),
                          ci_lo=round(lo_m, 3), ci_hi=round(hi_m, 3),
                          n_event=int(y_c.sum()), n_control=int((y_c == 0).sum())))
-
-        # Autonomic composite on common set
-        Xa = sc.fit_transform(sub_common[par_feats].values)
-        lr_aut = LogisticRegression(max_iter=1000).fit(Xa, y_c)
-        score_aut = lr_aut.predict_proba(Xa)[:, 1]
-        auc_a, lo_a, hi_a = auc_ci(y_c, score_aut, B=B)
         rows.append(dict(cohort=cohort, outcome=outcome, axis="autonomic",
                          feature="autonomic_composite", auc=round(auc_a, 3),
                          ci_lo=round(lo_a, 3), ci_hi=round(hi_a, 3),
                          n_event=int(y_c.sum()), n_control=int((y_c == 0).sum())))
-
-        # MAP + Autonomic combined on common set
-        Xc = sc.fit_transform(sub_common[all_feats].values)
-        lr_comb = LogisticRegression(max_iter=1000).fit(Xc, y_c)
-        score_comb = lr_comb.predict_proba(Xc)[:, 1]
-        auc_comb, lo_comb, hi_comb = auc_ci(y_c, score_comb, B=B)
         rows.append(dict(cohort=cohort, outcome=outcome, axis="combined",
                          feature="MAP+autonomic_composite", auc=round(auc_comb, 3),
                          ci_lo=round(lo_comb, 3), ci_hi=round(hi_comb, 3),
@@ -364,8 +374,9 @@ def compare_aucs(windows: pd.DataFrame, map_df: pd.DataFrame,
 
         # ── DeLong paired test (primary) ─────────────────────────────────────
         # H0: AUC(MAP+variabilidad) == AUC(MAP-solo) on the SAME N windows.
-        # score_comb and score_map are both predicted on sub_common, so the
-        # two ROC curves are correlated — this is the correct paired test.
+        # Both score vectors come from the same CV folds on the same rows, so
+        # the ROC curves are correlated — correct paired test (Sun & Xu 2014).
+        # Absolute AUC values are out-of-sample (5-fold CV).
         # δAUC > 0 means autonomic variables add information above raw MAP.
         a1, a2, delta, z, p = delong_paired_test(y_c, score_comb, score_map)
         delong_rows.append(dict(
@@ -430,7 +441,7 @@ if __name__ == "__main__":
         print(f"MAP features: {len(map_df)} windows, "
               f"{map_df['map_slope'].notna().sum()} with valid slope")
 
-        print("Computing AUC comparison + DeLong tests…")
+        print("Computing AUC comparison + DeLong tests (5-fold CV composites)…")
         tab, delong = compare_aucs(windows, map_df, cohort=cohort)
         all_auc_rows.append(tab)
         all_delong_rows.append(delong)
